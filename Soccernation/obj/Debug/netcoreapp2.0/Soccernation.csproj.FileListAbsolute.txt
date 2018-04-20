@@ -1,0 +1,11 @@
+D:\SoccernationWebApi\Soccernation\Soccernation\bin\Debug\netcoreapp2.0\Soccernation.deps.json
+D:\SoccernationWebApi\Soccernation\Soccernation\bin\Debug\netcoreapp2.0\Soccernation.runtimeconfig.json
+D:\SoccernationWebApi\Soccernation\Soccernation\bin\Debug\netcoreapp2.0\Soccernation.runtimeconfig.dev.json
+D:\SoccernationWebApi\Soccernation\Soccernation\bin\Debug\netcoreapp2.0\Soccernation.dll
+D:\SoccernationWebApi\Soccernation\Soccernation\bin\Debug\netcoreapp2.0\Soccernation.pdb
+D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.csprojResolveAssemblyReference.cache
+D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.csproj.CoreCompileInputs.cache
+D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.AssemblyInfoInputs.cache
+D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.AssemblyInfo.cs
+D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.dll
+D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.pdb

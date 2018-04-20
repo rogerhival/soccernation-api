@@ -12,7 +12,6 @@ namespace Soccernation.Models
         public string Status { get; set; }
 
         public List<Player> Players { get; set; }
-        public Competition Competition { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }

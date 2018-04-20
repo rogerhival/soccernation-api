@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class Match : IEntity
+    public class Fixture : IEntity
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
+        public int Round { get; set; }
 
         public Team TeamHome { get; set; }
         public Team TeamVisitor { get; set; }

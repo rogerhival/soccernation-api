@@ -13,9 +13,10 @@ namespace Soccernation.Models
         public DateTime Date { get; set; }
 
         public List<Team> Teams { get; set; }
-        public List<Match> Matches { get; set; }
+        public List<Fixture> Fixtures { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public string Status { get; set; }
+        public List<ResultRow> Results { get; set; }
     }
 }

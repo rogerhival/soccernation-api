@@ -12,9 +12,11 @@ namespace Soccernation.Controllers
     public abstract class BaseController<T> : Controller where T : class, IEntity
     {
         readonly IApplicationRepository<T> _repository;
+        public SoccernationContext Context;
 
-        public BaseController(IApplicationRepository<T> repository)
+        public BaseController(IApplicationRepository<T> repository, SoccernationContext context)
         {
+            Context = context;
             _repository = repository;
         }
 
@@ -24,7 +26,7 @@ namespace Soccernation.Controllers
             return Ok(_repository.Get());
         }
 
-        [HttpGet("{id}", Name = "Find")]
+        [HttpGet("{id}")]
         public IActionResult Find(Guid id)
         {
             var record = _repository.Get(id);

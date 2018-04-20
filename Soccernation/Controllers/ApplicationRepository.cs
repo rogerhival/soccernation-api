@@ -10,7 +10,7 @@ namespace Soccernation.Controllers
 {
     public class ApplicationRepository<T> : IApplicationRepository<T> where T : class, IEntity
     {
-        SoccernationContext _context;
+        public SoccernationContext _context;
 
         public ApplicationRepository(SoccernationContext context)
         {

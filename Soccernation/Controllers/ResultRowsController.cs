@@ -9,14 +9,10 @@ using Soccernation.Models;
 namespace Soccernation.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Users")]
-    public class UsersController : BaseController<User>
+    public class ResultRowsController : BaseController<ResultRow>
     {
-        IApplicationRepository<User> _context;
-
-        public UsersController(IApplicationRepository<User> context) : base(context)
+        public ResultRowsController(IApplicationRepository<ResultRow> repository, SoccernationContext context) : base(repository, context)
         {
-            _context = context;
         }
     }
 }

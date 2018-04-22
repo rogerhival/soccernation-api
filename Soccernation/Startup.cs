@@ -26,8 +26,9 @@ namespace Soccernation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SoccernationContext>(opt => opt.UseInMemoryDatabase("SoccernationList"));
+            services.AddCors();
 
+            services.AddDbContext<SoccernationContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IApplicationRepository<>), typeof(ApplicationRepository<>));
             services.AddMvc();
         }

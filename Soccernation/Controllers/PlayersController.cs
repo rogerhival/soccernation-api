@@ -16,5 +16,16 @@ namespace Soccernation.Controllers
             Context.AddRange(Dummies.Players);
             Context.SaveChanges();
         }
+
+        [Route("{playerId}/teams")]
+        [HttpGet]
+        public IActionResult GetTeams(Guid playerId)
+        {
+            var teams = Context.Teams.Where(t => t.Players.FirstOrDefault(p => p.Id == playerId) != null);
+            if (teams == null)
+                return BadRequest();
+
+            return new ObjectResult(teams);
+        }
     }
 }

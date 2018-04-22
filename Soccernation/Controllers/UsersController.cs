@@ -13,8 +13,9 @@ namespace Soccernation.Controllers
     {
         public UsersController(IApplicationRepository<User> repository, SoccernationContext context) : base(repository, context)
         {
-            Context.AddRange(Dummies.Users);
-            Context.SaveChanges();
+            Context.Database.EnsureCreated();
+            //Context.AddRange(Dummies.Users);
+            //Context.SaveChanges();
         }
     }
 }

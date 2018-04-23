@@ -14,8 +14,6 @@ namespace Soccernation.Controllers
     {
         public CompetitionsController(IApplicationRepository<Competition> repository, SoccernationContext context) : base(repository, context)
         {
-            Context.AddRange(Dummies.Competitions);
-            Context.SaveChanges();
         }
 
         [HttpGet]
@@ -30,10 +28,26 @@ namespace Soccernation.Controllers
             return Ok(teams);
         }
 
-        //[HttpPost]
-        //public IActionResult AddTeam([FromBody] Team team, Guid competitionId)
-        //{
+        [HttpPost]
+        [Route("{competitionId}/team/{teamId}")]
+        public IActionResult AddTeam(Guid teamId, Guid competitionId)
+        {
+            var competition = Context.Competitions
+                .Include(c=>c.Teams)
+                .FirstOrDefault(c => c.Id == competitionId);
 
-        //}
+            if (competition == null)
+                return BadRequest();
+
+            //its adding all teams for now
+            var teams = Context.Teams.ToList();
+            if (teams == null)
+                return BadRequest();
+
+            competition.Teams.AddRange(teams);
+            Context.SaveChanges();
+
+            return Ok(competition);
+        }
     }
 }

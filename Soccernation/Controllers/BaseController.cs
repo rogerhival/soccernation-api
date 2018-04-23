@@ -18,6 +18,8 @@ namespace Soccernation.Controllers
         {
             Context = context;
             _repository = repository;
+            //Make sure any class that calls the controller, the database is created
+            Context.Database.EnsureCreated();
         }
 
         [HttpGet]
@@ -43,7 +45,7 @@ namespace Soccernation.Controllers
             if (await _repository.SaveAsync() == 0)
                 return BadRequest();
 
-            return CreatedAtAction("Find", record);
+            return Ok(record);
         }
 
         [HttpPut("{id}")]

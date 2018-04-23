@@ -13,8 +13,6 @@ namespace Soccernation.Controllers
     {
         public PlayersController(IApplicationRepository<Player> repository, SoccernationContext context) : base(repository, context)
         {
-            Context.AddRange(Dummies.Players);
-            Context.SaveChanges();
         }
 
         [Route("{playerId}/teams")]
@@ -25,7 +23,7 @@ namespace Soccernation.Controllers
             if (teams == null)
                 return BadRequest();
 
-            return new ObjectResult(teams);
+            return Ok(teams);
         }
     }
 }

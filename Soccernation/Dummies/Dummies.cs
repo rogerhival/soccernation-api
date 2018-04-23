@@ -17,7 +17,7 @@ namespace Soccernation
 
         static List<User> GetUsers()
         {
-            if (users != null)
+            if (users == null)
             {
                 users = new List<User>()
                     {
@@ -157,7 +157,7 @@ namespace Soccernation
                         {
                             Id = new Guid("14A9F72E-6704-4917-8038-C9AA45A3ED20"),
                             CreatedOn = DateTime.Now,
-                            Date = DateTime.Today,
+                            StartDate = DateTime.Today,
                             Status = EntityStatus.Active,
                             Fixtures = Fixtures,
                             Name = "Cup 1",

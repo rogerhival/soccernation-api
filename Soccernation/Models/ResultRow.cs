@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,9 @@ namespace Soccernation.Models
 {
     public class ResultRow : IEntity
     {
+        [Key]
         public Guid Id { get; set; }
+        [Required]
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public string Status { get => string.Empty; set => throw new NotImplementedException(); }
@@ -22,6 +25,7 @@ namespace Soccernation.Models
         public int ConcedeForfeits { get; set; }
         public int GoalsFor { get; set; }
         public int GoalsAgainst { get; set; }
+
 
         public int Bonus => GoalsFor - GoalsAgainst;
         public int Points => ((Wins + Forfeits) * 3) + Draws;

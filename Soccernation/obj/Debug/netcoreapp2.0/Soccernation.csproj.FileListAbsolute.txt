@@ -8,4 +8,3 @@ D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccerna
 D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.AssemblyInfo.cs
 D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.dll
 D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.pdb
-D:\SoccernationWebApi\Soccernation\Soccernation\obj\Debug\netcoreapp2.0\Soccernation.csprojResolveAssemblyReference.cache

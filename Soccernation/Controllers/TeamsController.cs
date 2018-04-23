@@ -16,17 +16,18 @@ namespace Soccernation.Controllers
         public TeamsController(IApplicationRepository<Team> repository, SoccernationContext context) : base(repository, context)
         {
             _repo = repository;
-            Context.AddRange(Dummies.Teams);
-            Context.SaveChanges();
         }
 
         [HttpPost]
-        public IActionResult AddPlayer([FromBody] Player player, Guid teamId)
+        [Route("{teamId}/player")]
+        public async Task<IActionResult> AddPlayer([FromBody] Player player, Guid teamId)
         {
             _repo.Get(teamId).Players.Add(player);
-            Context.SaveChanges();
 
-            return CreatedAtRoute("/", player);
+            if (await _repo.SaveAsync() == 0)
+                return BadRequest();
+
+            return NoContent();
         }
     }
 }

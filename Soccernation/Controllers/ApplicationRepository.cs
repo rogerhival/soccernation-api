@@ -29,6 +29,7 @@ namespace Soccernation.Controllers
 
         public void Create(T record)
         {
+            record.Id = Guid.NewGuid();
             record.CreatedOn = DateTime.Now;
             record.ModifiedOn = record.CreatedOn;
             record.Status = EntityStatus.Active;

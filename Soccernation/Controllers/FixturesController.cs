@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Soccernation.Models;
 
 namespace Soccernation.Controllers
@@ -13,18 +14,20 @@ namespace Soccernation.Controllers
     {
         public FixturesController(IApplicationRepository<Fixture> repository, SoccernationContext context) : base(repository, context)
         {
-            Context.AddRange(Dummies.Fixtures);
-            Context.SaveChanges();
+            //Context.AddRange(Dummies.Fixtures);
+            //Context.SaveChanges();
         }
 
-        [HttpGet("{id}")]
-        [Route("team")]
-        public IActionResult GetTeamInFixture(Guid id)
+        [HttpGet]
+        [Route("team/{id}/competition/{competitionId}")]
+        public IActionResult GetTeamInFixture(Guid id, Guid competitionId)
         {
-            Context.Fixtures.Add(new Fixture() { Id = Guid.NewGuid(), CreatedOn = DateTime.Today });
-            Context.SaveChanges();
+            var fixtures = Context.Competitions
+                            .Include(a => a.Teams)
+                            .Include(a => a.Fixtures)
+                            .FirstOrDefault(b => b.Id == competitionId && b.Teams.Where(c => c.Id == id) != null).Fixtures;
 
-            return Ok(Context.Fixtures.First());
+            return Ok(fixtures);
         }
     }
 }

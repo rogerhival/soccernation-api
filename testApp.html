@@ -1,0 +1,68 @@
+<!--
+How to use this test file:
+	- Move it to C:\inetpub\wwwroot
+	- Change the URL localhost port to your local one
+	- if you can't access the URL, you probably missing "app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());" on Startup.cs
+-->
+
+<html>
+<head>
+	<title>Soccer Test</title>
+
+	<style>
+		table, th, td {
+			border: 1px solid grey;
+			border-collapse: collapse;
+			padding: 5px;
+		}
+
+			table tr:nth-child(odd) {
+				background-color: #f2f2f2;
+			}
+
+			table tr:nth-child(even) {
+				background-color: #ffffff;
+			}
+	</style>
+
+	<script>
+		function studentController($scope, $http) {
+			var url = "http://localhost:65075/api/fixtures/team/6648573b-b0fe-45ae-92d5-e70e4f322da8/competition/14a9f72e-6704-4917-8038-c9aa45a3ed20";
+
+			$http.get(url).then(function (response) {
+				$scope.students = response.data;
+			}, function myError(response) {
+				$scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
+			});
+		}
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+</head>
+<body>
+	<h2>SoccerNation</h2>
+	<div ng-app="" ng-controller="studentController">
+
+		Json result: {{students}}
+		<br /><br />
+		<table>
+			<tr>
+				<th>id</th>
+				<th>round</th>
+				<th>teamHome</th>
+				<th>teamVisitor</th>
+			</tr>
+
+			<tr ng-repeat="student in students">
+				<td>{{ student.id }}</td>
+				<td>{{ student.round }}</td>
+				<td>{{ student.teamHome.name }}</td>
+				<td>{{ student.teamVisitor.name }}</td>
+			</tr>
+		</table>
+	</div>
+
+
+</body>
+</html>

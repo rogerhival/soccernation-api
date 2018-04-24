@@ -40,9 +40,17 @@ How to use this test file:
 				});
 
 			$scope.fix = function (id) {	
-				var url = "http://localhost:65075/api/fixtures/team/6648573b-b0fe-45ae-92d5-e70e4f322da8/competition/" + id;
-				$http.get(url).then(function (response) {
+				var urlPending = "http://localhost:65075/api/fixtures/competition/" + id + "/status/Pending";
+				$http.get(urlPending).then(function (response) {
 					 $scope.fixtures = response.data;
+					},
+					function myError(response) {
+						$scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
+					});
+
+				var urlFinished = "http://localhost:65075/api/fixtures/competition/" + id + "/status/Finished";
+				$http.get(urlFinished).then(function (response) {
+					$scope.fixturesResult = response.data;
 					},
 					function myError(response) {
 						$scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
@@ -56,19 +64,44 @@ How to use this test file:
 <div ng-app="mainApp">
 	<div ng-controller="competitionsController">
 		Select competition: <select ng-model="selectedCompetition" ng-options="x.name for x in competitions" ng-change="fix(selectedCompetition.id)"></select>
-		<br/><br/>
+		<br /><br />
 		<table>
 			<tr>
-				<th>id</th>
+				<th colspan="4">Fixtures</th>
+			</tr>
+			<tr>
+				<th>status</th>
 				<th>round</th>
 				<th>teamHome</th>
 				<th>teamVisitor</th>
 			</tr>
 			<tr ng-repeat="fixture in fixtures">
-				<td>{{ fixture.id }}</td>
+				<td>{{ fixture.status }}</td>
 				<td>{{ fixture.round }}</td>
 				<td>{{ fixture.teamHome.name }}</td>
 				<td>{{ fixture.teamVisitor.name }}</td>
+			</tr>
+		</table>
+		<br />
+		<table>
+			<tr>
+				<th colspan="6">Results</th>
+			</tr>
+			<tr>
+				<th>status</th>
+				<th>round</th>
+				<th>teamHome</th>
+				<th>teamVisitor</th>
+				<th>teamHome goals</th>
+				<th>teamVisitor goals</th>
+			</tr>
+			<tr ng-repeat="fixture in fixturesResult">
+				<td>{{ fixture.status }}</td>
+				<td>{{ fixture.round }}</td>
+				<td>{{ fixture.teamHome.name }}</td>
+				<td>{{ fixture.teamVisitor.name }}</td>
+				<td>{{ fixture.teamHomeScore }}</td>
+				<td>{{ fixture.teamVisitorScore }}</td>
 			</tr>
 		</table>
 	</div>

@@ -205,7 +205,7 @@ namespace Soccernation
                             Id = new Guid("7D058B0F-57AC-4194-864C-7E2F71BDEDEB"),
                             CreatedOn = DateTime.Now,
                             Date = DateTime.Today,
-                            Status = EntityStatus.Active,
+                            Status = FixtureStatus.Pending,
                             Round = 1,
                             TeamHome = Teams[0],
                             TeamVisitor = Teams[1]
@@ -215,7 +215,7 @@ namespace Soccernation
                             Id = new Guid("02ADB1E8-DF53-4414-B66B-EA217EEBC845"),
                             CreatedOn = DateTime.Now,
                             Date = DateTime.Today.AddDays(7),
-                            Status = EntityStatus.Active,
+                            Status = FixtureStatus.Pending,
                             Round = 1,
                             TeamHome = Teams[2],
                             TeamVisitor = Teams[3]
@@ -225,7 +225,7 @@ namespace Soccernation
 		                    Id = new Guid("A278FCE1-EC0C-4682-9CF0-8FC82D8637B6"),
 		                    CreatedOn = DateTime.Now,
 		                    Date = DateTime.Today.AddDays(7),
-		                    Status = EntityStatus.Active,
+		                    Status = FixtureStatus.Pending,
 		                    Round = 1,
 		                    TeamHome = Teams[4],
 		                    TeamVisitor = Teams[5]
@@ -235,7 +235,7 @@ namespace Soccernation
 		                    Id = new Guid("08F06CD6-108C-47E6-AEC3-0B25A2ABFE33"),
 		                    CreatedOn = DateTime.Now,
 		                    Date = DateTime.Today.AddDays(7),
-		                    Status = EntityStatus.Active,
+		                    Status = FixtureStatus.Pending,
 		                    Round = 1,
 		                    TeamHome = Teams[6],
 		                    TeamVisitor = Teams[7]
@@ -245,7 +245,7 @@ namespace Soccernation
 		                    Id = new Guid("531E6399-2938-4F95-A54F-EE2BB6D4140F"),
 		                    CreatedOn = DateTime.Now,
 		                    Date = DateTime.Today.AddDays(7),
-		                    Status = EntityStatus.Active,
+		                    Status = FixtureStatus.Pending,
 		                    Round = 1,
 		                    TeamHome = Teams[8],
 		                    TeamVisitor = Teams[9]
@@ -255,10 +255,22 @@ namespace Soccernation
 		                    Id = new Guid("13B69E9C-C503-421F-98F4-00335AF24AB4"),
 		                    CreatedOn = DateTime.Now,
 		                    Date = DateTime.Today.AddDays(7),
-		                    Status = EntityStatus.Active,
+		                    Status = FixtureStatus.Pending,
 		                    Round = 1,
 		                    TeamHome = Teams[10],
 		                    TeamVisitor = Teams[11]
+	                    },
+	                    new Fixture()
+	                    {
+		                    Id = new Guid("33049F8F-EC43-47E0-803F-56391C67F1FE"),
+		                    CreatedOn = DateTime.Now,
+		                    Date = DateTime.Today.AddDays(-1),
+		                    Status = FixtureStatus.Finished,
+		                    Round = 1,
+		                    TeamHome = Teams[0],
+		                    TeamVisitor = Teams[1],
+							TeamHomeScore = 6,
+							TeamVisitorScore = 2
 	                    }
 					};
             }
@@ -281,7 +293,17 @@ namespace Soccernation
                             Fixtures = Fixtures,
                             Name = "Futsal, Men's Thursday Lunchtime 2",
                             Teams = Teams
-                        }
+                        },
+	                    new Competition()
+	                    {
+		                    Id = new Guid("8CE1B530-3EFA-4907-B522-1D1ADB4D7CA4"),
+		                    CreatedOn = DateTime.Now,
+		                    StartDate = DateTime.Today,
+		                    Status = EntityStatus.Active,
+		                    //Fixtures = Fixtures,
+		                    Name = "Men's Monday DIV1",
+		                    //Teams = Teams
+	                    }
 					};
             }
             return competitions;

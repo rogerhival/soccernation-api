@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Soccernation.Models;
 
 namespace Soccernation.Controllers
 {
-    [Produces("application/json")]
+	[Produces("application/json")]
     public class FixturesController : BaseController<Fixture>
     {
         public FixturesController(IApplicationRepository<Fixture> repository, SoccernationContext context) : base(repository, context)
         {
-        }
+	        //if (Context.Competitions == null || !Context.Competitions.Any())
+	        //{
+		       // Context.AddRange(Dummies.Competitions);
+		       // Context.SaveChanges();
+	        //}
+		}
 
         [HttpGet]
         [Route("team/{id}/competition/{competitionId}")]
@@ -32,14 +34,33 @@ namespace Soccernation.Controllers
         [Route("competition/{competitionId}")]
         public IActionResult GetByCompetition(Guid competitionId)
         {
-            var competition = Context.Competitions.Include(c => c.Fixtures).FirstOrDefault(c => c.Id == competitionId);
+            var competition = Context.Competitions
+				.Include(a => a.Teams)
+				.Include(c => c.Fixtures)
+				.FirstOrDefault(c => c.Id == competitionId);
+
             if (competition == null)
                 return BadRequest();
 
             return Ok(competition.Fixtures);
         }
 
-        [HttpGet]
+	    [HttpGet]
+	    [Route("competition/{competitionId}/status/{status}")]
+	    public IActionResult GetByCompetitionAndStatus(Guid competitionId, string status)
+	    {
+		    var competition = Context.Competitions
+			    .Include(a => a.Teams)
+			    .Include(c => c.Fixtures)
+			    .FirstOrDefault(c => c.Id == competitionId);
+
+		    if (competition == null)
+			    return BadRequest();
+
+		    return Ok(competition.Fixtures.Where(f => f.Status == status));
+	    }
+
+		[HttpGet]
         [Route("team/{teamId}")]
         public IActionResult GetByTeam(Guid teamId)
         {

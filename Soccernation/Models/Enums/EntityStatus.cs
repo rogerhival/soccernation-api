@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Soccernation.Models.Enums
+﻿namespace Soccernation.Models.Enums
 {
-    public static class EntityStatus
+	public static class EntityStatus
     {
         public const string Active = "Active";
         public const string Deleted = "Deleted";
@@ -13,4 +8,11 @@ namespace Soccernation.Models.Enums
         public const string Inactive = "Inactive";
         public const string Blocked = "Blocked";
     }
+
+	public static class FixtureStatus
+	{
+		public const string Pending = "Pending";
+		public const string Happening = "Happening";
+		public const string Finished = "Finished";
+	}
 }

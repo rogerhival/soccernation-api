@@ -29,6 +29,7 @@ namespace Soccernation
             services.AddCors();
 
             services.AddDbContext<SoccernationContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddScoped(typeof(IApplicationRepository<>), typeof(ApplicationRepository<>));
             services.AddMvc();
         }
@@ -40,6 +41,8 @@ namespace Soccernation
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
 
             app.UseMvc();
         }

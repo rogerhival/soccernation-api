@@ -11,8 +11,29 @@
 
 	public static class FixtureStatus
 	{
-		public const string Pending = "Pending";
-		public const string Happening = "Happening";
-		public const string Finished = "Finished";
-	}
+		public const string Pending = "PEN";
+		public const string Happening = "HAP";
+		public const string Finished = "FIN";
+
+        public const string PendingDescription = "Pending";
+        public const string HappeningDescription = "Happening";
+        public const string FinishedDescription = "Finished";
+
+        public static string GetDescriptionByCode(string code)
+        {
+            var result = string.Empty;
+            switch (code)
+            {
+                case Pending: result = PendingDescription;
+                    break;
+                case Happening:
+                    result = HappeningDescription;
+                    break;
+                case Finished:
+                    result = FinishedDescription;
+                    break;
+            }
+            return result;
+        }
+    }
 }

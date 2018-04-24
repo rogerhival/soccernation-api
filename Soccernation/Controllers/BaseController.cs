@@ -70,5 +70,17 @@ namespace Soccernation.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("addRange")]
+        public async Task<IActionResult> AddRange([FromBody] List<T> records)
+        {
+            foreach (var record in records)
+            {
+                _repository.Create(record);
+                if (await _repository.SaveAsync() == 0)
+                    return BadRequest();
+            }
+            return Ok("nice");
+        }
     }
 }

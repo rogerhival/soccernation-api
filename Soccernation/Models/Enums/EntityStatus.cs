@@ -32,6 +32,8 @@
                 case Finished:
                     result = FinishedDescription;
                     break;
+                default:
+                    return string.Empty;
             }
             return result;
         }

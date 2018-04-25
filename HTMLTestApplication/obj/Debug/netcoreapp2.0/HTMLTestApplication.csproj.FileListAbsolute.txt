@@ -1,0 +1,11 @@
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.deps.json
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.runtimeconfig.json
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.runtimeconfig.dev.json
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.dll
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.pdb
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.csprojResolveAssemblyReference.cache
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.csproj.CoreCompileInputs.cache
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.AssemblyInfoInputs.cache
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.AssemblyInfo.cs
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.dll
+D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.pdb

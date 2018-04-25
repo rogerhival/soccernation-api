@@ -26,7 +26,6 @@ namespace Soccernation.Models
         public int GoalsFor { get; set; }
         public int GoalsAgainst { get; set; }
 
-
         public int Bonus => GoalsFor - GoalsAgainst;
         public int Points => ((Wins + Forfeits) * 3) + Draws;
     }

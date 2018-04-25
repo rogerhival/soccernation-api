@@ -11,54 +11,19 @@ namespace Soccernation.Controllers
     {
         public FixturesController(IApplicationRepository<Fixture> repository, SoccernationContext context) : base(repository, context)
         {
-	        //if (Context.Competitions == null || !Context.Competitions.Any())
-	        //{
-		       // Context.AddRange(Dummies.Competitions);
-		       // Context.SaveChanges();
-	        //}
 		}
 
         [HttpGet]
-        [Route("team/{id}/competition/{competitionId}")]
-        public IActionResult GetFixturesOfATeamInACompetition(Guid id, Guid competitionId)
+        [Route("team/{teamId}/competition/{competitionId}")]
+        public IActionResult GetFixturesOfATeamInACompetition(Guid teamId, Guid competitionId)
         {
             var fixtures = Context.Competitions
                             .Include(a => a.Teams)
                             .Include(a => a.Fixtures)
-                            .FirstOrDefault(b => b.Id == competitionId && b.Teams.Where(c => c.Id == id) != null).Fixtures;
+                            .FirstOrDefault(b => b.Id == competitionId && b.Teams.Where(c => c.Id == teamId) != null).Fixtures;
 
             return Ok(fixtures);
         }
-
-        [HttpGet]
-        [Route("competition/{competitionId}")]
-        public IActionResult GetByCompetition(Guid competitionId)
-        {
-            var competition = Context.Competitions
-				.Include(a => a.Teams)
-				.Include(c => c.Fixtures)
-				.FirstOrDefault(c => c.Id == competitionId);
-
-            if (competition == null)
-                return BadRequest();
-
-            return Ok(competition.Fixtures);
-        }
-
-	    [HttpGet]
-	    [Route("competition/{competitionId}/status/{status}")]
-	    public IActionResult GetByCompetitionAndStatus(Guid competitionId, string status)
-	    {
-		    var competition = Context.Competitions
-			    .Include(a => a.Teams)
-			    .Include(c => c.Fixtures)
-			    .FirstOrDefault(c => c.Id == competitionId);
-
-		    if (competition == null)
-			    return BadRequest();
-
-		    return Ok(competition.Fixtures.Where(f => f.Status == status));
-	    }
 
 		[HttpGet]
         [Route("team/{teamId}")]

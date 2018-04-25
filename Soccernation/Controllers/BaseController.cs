@@ -80,7 +80,7 @@ namespace Soccernation.Controllers
                 if (await _repository.SaveAsync() == 0)
                     return BadRequest();
             }
-            return Ok("nice");
+            return NoContent();
         }
     }
 }

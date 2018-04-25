@@ -42,6 +42,10 @@ namespace Soccernation
                 app.UseDeveloperExceptionPage();
             }
 
+            // To use the index.html as test
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
 
             app.UseMvc();

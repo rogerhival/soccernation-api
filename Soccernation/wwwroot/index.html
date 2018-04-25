@@ -9,7 +9,7 @@ Reference
 
 <html>
 <head>
-    <title>Soccer Test</title>
+    <title>Soccernation</title>
 
     <style>
         table, th, td {
@@ -89,28 +89,27 @@ Reference
         var mainApp = angular.module("mainApp", []);
 
         mainApp.controller("competitionsController", function ($scope, $http) {
-            var urlComp = "http://localhost:53598/api/competitions";
+            var urlComp = "http://localhost:65075/api/competitions";
 
             $http.get(urlComp).then(function (response) {
-                alert('ok')
                 $scope.competitions = response.data;
             },
                 function myError(response) {
-                    alert('sa')
                     $scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
                 });
 
             $scope.fix = function (id) {
-                var urlPending = "http://localhost:53598/api/fixtures/competition/" + id + "/status/PEN";
+                //var urlPending = "http://localhost:65075/api/fixtures/competition/" + id + "/status/PEN";
+                var urlPending = "http://localhost:65075/api/competitions/" + id + "/fixtures";
                 $http.get(urlPending).then(function (response) {
-                    
                     $scope.fixtures = response.data;
                 },
                     function myError(response) {
-                        $scope.errorMessage = 'ERRO: statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
+                        var errorMessage = 'ERRO (' + urlPending + ': statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
+                        alert(errorMessage);
                     });
 
-                var urlFinished = "http://localhost:53598/api/fixtures/competition/" + id + "/status/FIN";
+                var urlFinished = "http://localhost:65075/api/fixtures/competition/" + id + "/status/FIN";
                 $http.get(urlFinished).then(function (response) {
                     $scope.fixturesResult = response.data;
                 },
@@ -124,21 +123,17 @@ Reference
 <body>
     <h2>SoccerNation</h2>
     
-
     <!-- Tab links -->
     <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'MainTab')" id="defaultOpen">Main</button>
         <button class="tablinks" onclick="openCity(event, 'AddFixture')">Add fixture</button>
         <button class="tablinks" onclick="openCity(event, 'AddTeam')">Add team</button>
-
     </div>
 
     <!-- Tab content -->
     <div id="MainTab" class="tabcontent">
-        
         <div ng-app="mainApp">
             <div ng-controller="competitionsController">
-                {{errorMessage}} <br />
                 Select competition: <select ng-model="selectedCompetition" ng-options="x.name for x in competitions" ng-change="fix(selectedCompetition.id)"></select>
                 <br /><br />
                 <table>

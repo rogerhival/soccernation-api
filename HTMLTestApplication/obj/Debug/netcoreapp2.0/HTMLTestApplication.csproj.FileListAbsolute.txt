@@ -9,3 +9,14 @@ D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\H
 D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.AssemblyInfo.cs
 D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.dll
 D:\SoccernationWebApi\Soccernation\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.pdb
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.deps.json
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.runtimeconfig.json
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.runtimeconfig.dev.json
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.dll
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\bin\Debug\netcoreapp2.0\HTMLTestApplication.pdb
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.csprojResolveAssemblyReference.cache
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.csproj.CoreCompileInputs.cache
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.AssemblyInfoInputs.cache
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.AssemblyInfo.cs
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.dll
+C:\Users\fmaro\source\repos\soccernation-api\HTMLTestApplication\obj\Debug\netcoreapp2.0\HTMLTestApplication.pdb

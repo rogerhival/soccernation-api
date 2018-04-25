@@ -1,0 +1,105 @@
+﻿<!--
+How to use this test file:
+    - Change the URL localhost port to your local one
+    - if you can't access the URL, you probably missing "app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());" on Startup.cs
+
+Reference
+    Make index.html as startup file in ASP.NET Core: http://www.talkingdotnet.com/make-index-html-startup-file-in-aspnet-core/
+-->
+
+<html>
+<head>
+    <title>Soccernation</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+            table tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script>
+        var mainApp = angular.module("mainApp", []);
+
+        mainApp.controller("addTeamController", function ($scope, $http) {
+            var urlComp = "http://localhost:65075/api/competitions";
+
+            $http.get(urlComp).then(function (response) {
+                $scope.competitions = response.data;
+            },
+                function myError(response) {
+                    $scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
+                });
+
+            $scope.submit = function () {
+
+                var urlAddTeam = "http://localhost:65075/api/teams";
+
+                alert($scope.teamName + ' -- ' + $scope.teamCompetition.id)
+
+                var data = { name: $scope.teamName, CompetitionId: $scope.teamCompetition.id };
+
+                $http.post(urlAddTeam, data).
+                    success(function (data, status, headers, config) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        alert(data);
+                    }).
+                    error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        alert('erro');
+                        alert(data);
+                    });
+            };
+        });
+    </script>
+</head>
+<body>
+    <h2>Add team to a competition</h2>
+
+    <div ng-app="mainApp" ng-controller="addTeamController">
+        <form ng-submit="submit()" name="studentForm" novalidate>
+            <table border="0">
+                <tr>
+                    <td>Team name:</td>
+                    <td>
+                        <input name="teamName" type="text" ng-model="teamName" required>
+                        <span style="color:red" ng-show="studentForm.teamName.$dirty && studentForm.teamName.$invalid">
+                            <span ng-show="studentForm.teamName.$error.required">Name is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Competition: </td>
+                    <td>
+                        <select name="teamCompetition" ng-model="teamCompetition" ng-options="x.name for x in competitions"></select>
+                        <span style="color:red" ng-show="studentForm.teamCompetition.$dirty && studentForm.teamCompetition.$invalid">
+                            <span ng-show="studentForm.teamCompetition.$error.required">Last Name is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" id="submit" value="Submit" />
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</body>
+</html>

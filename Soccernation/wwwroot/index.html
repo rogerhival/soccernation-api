@@ -80,7 +80,7 @@ Reference
             <br /><br />
             <table>
                 <tr>
-                    <th colspan="7">Ladder</th>
+                    <th colspan="10">Ladder</th>
                 </tr>
                 <tr>
                     <th>#</th>
@@ -89,6 +89,9 @@ Reference
                     <th>W</th>
                     <th>L</th>
                     <th>D</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th> <!--Goal Difference-->
                     <th>Pts</th>
                 </tr>
                 <tr ng-repeat="row in resultRows">
@@ -98,6 +101,9 @@ Reference
                     <td>{{ row.wins }}</td>
                     <td>{{ row.draws }}</td>
                     <td>{{ row.loses }}</td>
+                    <td>{{ row.goalsFor }}</td>
+                    <td>{{ row.goalsAgainst }}</td>
+                    <td>{{ row.bonus }}</td> <!--???-->
                     <td>{{ row.points }}</td>
                 </tr>
             </table>

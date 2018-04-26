@@ -7,11 +7,8 @@ using Soccernation.Models.Enums;
 
 namespace Soccernation.Models
 {
-    public class Competition : IEntity
+    public class Competition : EntityAbstract
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         public string Name { get; set; }
         [Required]
@@ -20,10 +17,7 @@ namespace Soccernation.Models
 
         public List<Team> Teams { get; set; }
         public List<Fixture> Fixtures { get; set; }
-        [Required]
-        public DateTime CreatedOn { get; set; }
-        public DateTime ModifiedOn { get; set; }
-        public string Status { get; set; }
+
         public List<ResultRow> Results { get; set; }
     }
 }

@@ -6,21 +6,12 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class Team : IEntity
+    public class Team : EntityAbstract
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         public string Name { get; set; }
-
-        public string Status { get; set; }
         public string LogoImage { get; set; }
 
         public List<Player> Players { get; set; }
-
-        [Required]
-        public DateTime CreatedOn { get; set; }
-        public DateTime ModifiedOn { get; set; }
     }
 }

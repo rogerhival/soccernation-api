@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class Fixture : IEntity
+    public class Fixture : EntityAbstract
     {
-        [Key]
-        public Guid Id { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
@@ -24,11 +22,5 @@ namespace Soccernation.Models
 
         public int TeamHomeScore { get; set; }
         public int TeamVisitorScore { get; set; }
-
-        public string Status { get; set; }
-
-        [Required]
-        public DateTime CreatedOn { get; set; }
-        public DateTime ModifiedOn { get; set; }
     }
 }

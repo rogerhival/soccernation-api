@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class User : IEntity
+    public class User : EntityAbstract
     {
-        [Key]
-        public Guid Id { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]
@@ -18,10 +16,5 @@ namespace Soccernation.Models
         public string Name { get; set; }
 
         public Player Player { get; set; }
-
-        [Required]
-        public DateTime CreatedOn { get; set; }
-        public DateTime ModifiedOn { get; set; }
-        public string Status { get; set; }
     }
 }

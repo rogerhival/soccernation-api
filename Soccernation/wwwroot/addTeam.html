@@ -39,7 +39,7 @@ Reference
                     $scope.competitions = response.data;
                 },
                 function myError(response) {
-                    $scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
+                    alert('statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError);
                 });
 
             $scope.submit = function () {
@@ -48,8 +48,8 @@ Reference
 
                 $http.post(urlAddTeam, data).
                     success(function (data, status, headers, config) {
-                        $scope.teamName = '';
                         alert('done');
+                        $scope.teamName = '';
                     }).
                     error(function (data, status, headers, config) {
                         alert('erro: ' + data);

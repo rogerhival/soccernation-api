@@ -42,9 +42,9 @@ Reference
                 });
 
             $scope.fix = function (id) {
-                var urlLadder = "http://localhost:65075/api/competitions/" + id + "/teams";
+                var urlLadder = "http://localhost:65075/api/competitions/" + id + "/ladder";
                 $http.get(urlLadder).then(function (response) {
-                    $scope.teams = response.data;
+                    $scope.resultRows = response.data;
                 },
                     function myError(response) {
                         var errorMessage = 'URL: ' + urlLadder + ', ERROR: statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
@@ -80,23 +80,25 @@ Reference
             <br /><br />
             <table>
                 <tr>
-                    <th colspan="6">Ladder</th>
+                    <th colspan="7">Ladder</th>
                 </tr>
                 <tr>
                     <th>#</th>
-                    <th>name</th>
+                    <th>team</th>
                     <th>P</th>
                     <th>W</th>
                     <th>L</th>
                     <th>D</th>
+                    <th>Pts</th>
                 </tr>
-                <tr ng-repeat="team in teams">
+                <tr ng-repeat="row in resultRows">
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ team.name }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ row.team.name }}</td>
+                    <td>{{ row.matches }}</td>
+                    <td>{{ row.wins }}</td>
+                    <td>{{ row.draws }}</td>
+                    <td>{{ row.loses }}</td>
+                    <td>{{ row.points }}</td>
                 </tr>
             </table>
             <br />
@@ -107,8 +109,8 @@ Reference
                 <tr>
                     <th>status</th>
                     <th>round</th>
-                    <th>teamHome</th>
-                    <th>teamVisitor</th>
+                    <th>home</th>
+                    <th>visitor</th>
                 </tr>
                 <tr ng-repeat="fixture in fixtures">
                     <td>{{ fixture.status }}</td>
@@ -125,10 +127,10 @@ Reference
                 <tr>
                     <th>status</th>
                     <th>round</th>
-                    <th>teamHome</th>
-                    <th>teamVisitor</th>
-                    <th>teamHome goals</th>
-                    <th>teamVisitor goals</th>
+                    <th>home</th>
+                    <th>visitor</th>
+                    <th>home goals</th>
+                    <th>visitor goals</th>
                 </tr>
                 <tr ng-repeat="fixture in fixturesResult">
                     <td>{{ fixture.status }}</td>

@@ -33,33 +33,26 @@ Reference
 
         mainApp.controller("addTeamController", function ($scope, $http) {
             var urlComp = "http://localhost:65075/api/competitions";
+            $scope.teamStatus = 'Active';
 
             $http.get(urlComp).then(function (response) {
-                $scope.competitions = response.data;
-            },
+                    $scope.competitions = response.data;
+                },
                 function myError(response) {
                     $scope.errorMessage = 'statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError;
                 });
 
             $scope.submit = function () {
-
-                var urlAddTeam = "http://localhost:65075/api/teams";
-
-                alert($scope.teamName + ' -- ' + $scope.teamCompetition.id)
-
-                var data = { name: $scope.teamName, CompetitionId: $scope.teamCompetition.id };
+                var urlAddTeam = "http://localhost:65075/api/competitions/" + $scope.teamCompetition.id + "/teams";
+                var data = [{ name: $scope.teamName, status: $scope.teamStatus }];
 
                 $http.post(urlAddTeam, data).
                     success(function (data, status, headers, config) {
-                        // this callback will be called asynchronously
-                        // when the response is available
-                        alert(data);
+                        $scope.teamName = '';
+                        alert('done');
                     }).
                     error(function (data, status, headers, config) {
-                        // called asynchronously if an error occurs
-                        // or server returns response with an error status.
-                        alert('erro');
-                        alert(data);
+                        alert('erro: ' + data);
                     });
             };
         });
@@ -72,6 +65,16 @@ Reference
         <form ng-submit="submit()" name="studentForm" novalidate>
             <table border="0">
                 <tr>
+                    <td>Competition: </td>
+                    <td>
+                        <select name="teamCompetition" ng-model="teamCompetition" ng-options="x.name for x in competitions"></select>
+                        <span style="color:red" ng-show="studentForm.teamCompetition.$dirty && studentForm.teamCompetition.$invalid">
+                            <span ng-show="studentForm.teamCompetition.$error.required">Last Name is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
                     <td>Team name:</td>
                     <td>
                         <input name="teamName" type="text" ng-model="teamName" required>
@@ -80,13 +83,17 @@ Reference
                         </span>
                     </td>
                 </tr>
-
+                
                 <tr>
-                    <td>Competition: </td>
+                    <td>Status:</td>
                     <td>
-                        <select name="teamCompetition" ng-model="teamCompetition" ng-options="x.name for x in competitions"></select>
-                        <span style="color:red" ng-show="studentForm.teamCompetition.$dirty && studentForm.teamCompetition.$invalid">
-                            <span ng-show="studentForm.teamCompetition.$error.required">Last Name is required.</span>
+                        <select name="teamStatus" id="teamStatus" ng-model="teamStatus">
+                            <option value="Active" selected>Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Blocked">Blocked</option>
+                        </select>
+                        <span style="color:red" ng-show="studentForm.teamStatus.$dirty && studentForm.teamStatus.$invalid">
+                            <span ng-show="studentForm.teamStatus.$error.required">Status is required.</span>
                         </span>
                     </td>
                 </tr>

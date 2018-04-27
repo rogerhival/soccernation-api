@@ -16,5 +16,7 @@ namespace Soccernation.Models
         public DbSet<Fixture> Fixtures { get; set; }
         public DbSet<ResultRow> ResultRows { get; set; }
         public DbSet<CompetitionsTeams> CompetitionsTeams { get; set; }
+        public DbSet<Court> Courts { get; set; }
+        public DbSet<CompetitionsCourts> CompetitionsCourts { get; set; }
     }
 }

@@ -26,7 +26,6 @@ namespace Soccernation.Controllers
         {
             return Context.Competitions
                 .Include(c => c.Fixtures)
-                .Include(c => c.Courts)
                 .FirstOrDefault(c => c.Id == competitionId);
         }
 
@@ -46,8 +45,8 @@ namespace Soccernation.Controllers
         }
 
         [HttpPost]
-        [Route("{competitionId}/teams")]
-        public IActionResult AddTeam([FromBody] List<Team> teams, Guid competitionId)
+        [Route("{competitionId}/teams?hasPaid={hasPaid}")]
+        public IActionResult AddTeam([FromBody] List<Team> teams, Guid competitionId, [FromQuery] byte hasPaid = 0)
         {
             if (teams == null)
                 return BadRequest();
@@ -57,7 +56,7 @@ namespace Soccernation.Controllers
             if (competition == null)
                 return BadRequest();
 
-            teams.ForEach((team) => { Context.CompetitionsTeams.Add(new CompetitionsTeams { Team = team, Competition = competition }); });
+            teams.ForEach((team) => { Context.CompetitionsTeams.Add(new CompetitionsTeams { Team = team, Competition = competition, HasPaid = (hasPaid == 1)}); });
             Context.SaveChanges();
 
             return Ok(competition);
@@ -102,6 +101,37 @@ namespace Soccernation.Controllers
             return Ok(competition.Fixtures);
         }
 
+        [HttpGet]
+        [Route("{competitionId}/courts")]
+        public IActionResult GetCourts(Guid competitionId)
+        {
+            var competition = GetById(competitionId);
+
+            if (competition == null)
+                return BadRequest();
+
+            var courts = Context.CompetitionsCourts.Where(o => o.Competition == competition && (o.StartTime >= competition.StartTime && o.EndTime <= competition.EndTime)).Select(o => o.Court);
+
+            return Ok(courts);
+        }
+
+        [HttpPost]
+        [Route("{competitionId}/courts")]
+        public IActionResult AddCourt([FromBody] List<Court> courts, Guid competitionId)
+        {
+            if (courts == null)
+                return BadRequest();
+
+            var competition = GetById(competitionId);
+
+            if (competition == null)
+                return BadRequest();
+
+            courts.ForEach((court) => { Context.CompetitionsCourts.Add(new CompetitionsCourts { Court = court, Competition = competition, StartTime = court.StartTime, EndTime = court.EndTime }); });
+            Context.SaveChanges();
+
+            return Ok(competition);
+        }
 
         [HttpGet]
         [Route("{competitionId}/ladder")]

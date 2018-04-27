@@ -1,0 +1,121 @@
+﻿<!--
+How to use this test file:
+    - Change the URL localhost port to your local one
+    - if you can't access the URL, you probably missing "app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());" on Startup.cs
+
+Reference
+    Make index.html as startup file in ASP.NET Core: http://www.talkingdotnet.com/make-index-html-startup-file-in-aspnet-core/
+-->
+
+<html>
+<head>
+    <title>Soccernation</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+            table tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script>
+        var mainApp = angular.module("mainApp", []);
+
+        mainApp.controller("addTeamController", function ($scope, $http) {
+            var urlComp = "http://localhost:65075/api/competitions";
+            $scope.teamStatus = 'Active';
+
+            $http.get(urlComp).then(function (response) {
+                    $scope.competitions = response.data;
+                },
+                function myError(response) {
+                    alert('statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError);
+                });
+
+            $scope.generateFixtures = function () {
+                var urlAddTeam = "http://localhost:65075/api/competitions/" + $scope.teamCompetition.id + "/generateFixtures";
+                
+                $http.get(urlAddTeam).then(function (response) {
+                    $scope.fixtures = response.data;
+                },
+                    function myError(response) {
+                        alert('statusText: ' + response.statusText + '... errorMessage: ' + response.errorMessage + '... myError: ' + response.myError);
+                    });
+            };
+        });
+    </script>
+</head>
+<body>
+    <h2>Add team to a competition</h2>
+
+    <div ng-app="mainApp" ng-controller="addTeamController">
+        <div>
+            <td>Competition: </td>
+            <td>
+                <select name="teamCompetition" ng-model="teamCompetition" ng-options="x.name for x in competitions"></select>
+                <span style="color:red" ng-show="studentForm.teamCompetition.$dirty && studentForm.teamCompetition.$invalid">
+                    <span ng-show="studentForm.teamCompetition.$error.required">Last Name is required.</span>
+                </span>
+            </td>
+        </div>
+        <br />
+        <input type="button" id="generateFixtures" value="Generate Fixtures" ng-click="generateFixtures()" />
+        <br />
+        <br />
+        <div>
+            <form ng-submit="submit()" name="studentForm" novalidate>
+                <table border="0">
+                    
+                    <tr ng-repeat="row in fixtures">
+                        <td>{{ row.round }}</td>
+                        <td>{{ row.teamHome.name }}</td>
+                        <td>{{ row.teamVisitor.name }}</td>
+                        <td>{{ row.status }}</td>
+                    </tr>
+
+                    <!--<tr>
+                        <td>Team name:</td>
+                        <td>
+                            <input name="teamName" type="text" ng-model="teamName" required>
+                            <span style="color:red" ng-show="studentForm.teamName.$dirty && studentForm.teamName.$invalid">
+                                <span ng-show="studentForm.teamName.$error.required">Name is required.</span>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Status:</td>
+                        <td>
+                            <select name="teamStatus" id="teamStatus" ng-model="teamStatus">
+                                <option value="Active" selected>Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Blocked">Blocked</option>
+                            </select>
+                            <span style="color:red" ng-show="studentForm.teamStatus.$dirty && studentForm.teamStatus.$invalid">
+                                <span ng-show="studentForm.teamStatus.$error.required">Status is required.</span>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" id="submit" value="Submit" />
+                        </td>
+                    </tr>-->
+
+                </table>
+            </form>
+        </div>
+</body>
+</html>

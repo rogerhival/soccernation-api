@@ -26,6 +26,7 @@ namespace Soccernation.Controllers
         {
             return Context.Competitions
                 .Include(c => c.Fixtures)
+                .Include(c => c.Courts)
                 .FirstOrDefault(c => c.Id == competitionId);
         }
 
@@ -77,7 +78,7 @@ namespace Soccernation.Controllers
 
             //apply filters
             if (fixtureTeam != null)
-                fixtures = fixtures.Where(f => f.TeamHome == fixtureTeam || f.TeamVisitor == fixtureTeam).OrderBy(o => o.Date).ThenBy(o => o.Round).ToList();
+                fixtures = fixtures.Where(f => f.TeamHome == fixtureTeam || f.TeamVisitor == fixtureTeam).OrderBy(o => o.DateUtc).ThenBy(o => o.Round).ToList();
 
             if (!string.IsNullOrEmpty(fixtureStatus))
                 fixtures = fixtures.Where(f => f.Status == fixtureStatus).ToList();

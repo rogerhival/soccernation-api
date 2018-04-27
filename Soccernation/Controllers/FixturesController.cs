@@ -27,7 +27,7 @@ namespace Soccernation.Controllers
             if (team == null)
                 return BadRequest();
 
-            var fixtures = competition.Fixtures.Where(o => o.TeamHome == team || o.TeamVisitor == team).OrderBy(o => o.Date).ThenBy(o => o.Round);
+            var fixtures = competition.Fixtures.Where(o => o.TeamHome == team || o.TeamVisitor == team).OrderBy(o => o.DateUtc).ThenBy(o => o.Round);
             if (fixtures == null)
                 return BadRequest();
 
@@ -42,7 +42,7 @@ namespace Soccernation.Controllers
             if (team == null)
                 return BadRequest();
 
-            var fixtures = Context.Fixtures.Where(o => o.TeamHome == team || o.TeamVisitor == team).OrderBy(o => o.Date).ThenBy(o => o.Round);
+            var fixtures = Context.Fixtures.Where(o => o.TeamHome == team || o.TeamVisitor == team).OrderBy(o => o.DateUtc).ThenBy(o => o.Round);
             if (fixtures == null)
                 return BadRequest();
 
@@ -61,7 +61,7 @@ namespace Soccernation.Controllers
             if (teams == null)
                 return BadRequest();
 
-            var fixtures = Context.Fixtures.Where(o => teams.Any(t => t == o.TeamHome || t == o.TeamVisitor)).OrderBy(o => o.Date).ThenBy(o => o.Round);
+            var fixtures = Context.Fixtures.Where(o => teams.Any(t => t == o.TeamHome || t == o.TeamVisitor)).OrderBy(o => o.DateUtc).ThenBy(o => o.Round);
             if (fixtures == null)
                 return BadRequest();
 

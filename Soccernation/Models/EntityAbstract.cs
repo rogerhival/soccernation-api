@@ -11,16 +11,16 @@ namespace Soccernation.Models
     {
         public EntityAbstract()
         {
-            CreatedOn = DateTime.UtcNow;
+            CreatedOnUtc = DateTime.UtcNow;
             Id = Guid.NewGuid();
         }
 
         [Key]
         public Guid Id { get; set; }
         [Required]
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOnUtc { get; set; }
 
-        public DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOnUtc { get; set; }
         public string Status { get; set; }
     }
 }

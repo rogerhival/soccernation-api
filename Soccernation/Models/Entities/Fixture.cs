@@ -10,7 +10,7 @@ namespace Soccernation.Models
     {
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime DateUtc { get; set; }
 
         [Required]
         public int Round { get; set; }
@@ -19,6 +19,8 @@ namespace Soccernation.Models
         public Team TeamHome { get; set; }
         [Required]
         public Team TeamVisitor { get; set; }
+        
+        public Court Court { get; set; }
 
         public int TeamHomeScore { get; set; }
         public int TeamVisitorScore { get; set; }

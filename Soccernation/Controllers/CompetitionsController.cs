@@ -25,7 +25,6 @@ namespace Soccernation.Controllers
         Competition GetById(Guid competitionId)
         {
             return Context.Competitions
-                .Include(a => a.Teams)
                 .Include(c => c.Fixtures)
                 .FirstOrDefault(c => c.Id == competitionId);
         }
@@ -40,7 +39,9 @@ namespace Soccernation.Controllers
             if (competition == null)
                 return BadRequest();
 
-            return Ok(competition.Teams);
+            var competitionTeams = Context.CompetitionsTeams.Where(o => o.Competition == competition).Select(c => c.Team);
+
+            return Ok(competitionTeams);
         }
 
         [HttpPost]
@@ -55,7 +56,7 @@ namespace Soccernation.Controllers
             if (competition == null)
                 return BadRequest();
 
-            competition.Teams.AddRange(teams);
+            teams.ForEach((team) => { Context.CompetitionsTeams.Add(new CompetitionsTeams { Team = team, Competition = competition }); });
             Context.SaveChanges();
 
             return Ok(competition);
@@ -113,7 +114,7 @@ namespace Soccernation.Controllers
                 return BadRequest();
 
             var resultRows = new List<ResultRow>();
-            var teams = competition.Teams;
+            var teams = Context.CompetitionsTeams.Where(o => o.Competition == competition).Select(c => c.Team);
 
             foreach (var item in teams)
             {

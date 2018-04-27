@@ -15,7 +15,6 @@ namespace Soccernation.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public List<Team> Teams { get; set; }
         public List<Fixture> Fixtures { get; set; }
 
         public List<ResultRow> Results { get; set; }

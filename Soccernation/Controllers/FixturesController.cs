@@ -17,10 +17,19 @@ namespace Soccernation.Controllers
         [Route("team/{teamId}/competition/{competitionId}")]
         public IActionResult GetFixturesOfATeamInACompetition(Guid teamId, Guid competitionId)
         {
-            var fixtures = Context.Competitions
-                            .Include(a => a.Teams)
+            var competition = Context.Competitions
                             .Include(a => a.Fixtures)
-                            .FirstOrDefault(b => b.Id == competitionId && b.Teams.Where(c => c.Id == teamId) != null).Fixtures;
+                            .FirstOrDefault(b => b.Id == competitionId);
+            if (competition == null)
+                return BadRequest();
+
+            var team = Context.Teams.FirstOrDefault(o => o.Id == teamId);
+            if (team == null)
+                return BadRequest();
+
+            var fixtures = competition.Fixtures.Where(o => o.TeamHome == team || o.TeamVisitor == team).OrderBy(o => o.Date).ThenBy(o => o.Round);
+            if (fixtures == null)
+                return BadRequest();
 
             return Ok(fixtures);
         }

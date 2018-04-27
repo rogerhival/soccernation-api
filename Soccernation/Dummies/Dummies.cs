@@ -6,7 +6,7 @@ using Soccernation.Models.Enums;
 
 namespace Soccernation
 {
-	public static class Dummies
+    public static class Dummies
     {
         public static List<User> Users => GetUsers();
         public static List<Player> Players => GetPlayers();
@@ -86,7 +86,7 @@ namespace Soccernation
         }
         static List<Player> players;
 
-		static List<Team> GetTeams()
+        static List<Team> GetTeams()
         {
             if (teams == null)
             {
@@ -108,87 +108,87 @@ namespace Soccernation
                             Status = EntityStatus.Active,
                             Players = Players.Skip(2).Take(2).ToList()
                         },
-	                    new Team()
-	                    {
-		                    Id = new Guid("065CBE10-67EF-4FFA-9B4F-42F3A03CB7AD"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Team Tam",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("5CF4812D-322E-4D09-900D-07DFBA1F5EF6"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Tricky Dicky's Big Suite",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("366CBD25-428D-4F88-B04C-976667C2E0C6"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Schenker Utd",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("445BDE94-AD73-4296-A0CE-09D6CDAB448F"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Qantas",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("90DDACF2-2BBD-4060-9459-4F918922F2E3"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Ivory Toast",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("6587CD7F-BBBF-436C-8A9E-7BB4C516235B"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Anchors",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("3D5F88B8-0FED-40AB-AD67-CA6BE154CC6A"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Commander Centre",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("4ED6DEA2-5DA3-4A9D-AA16-62E35225EB1E"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Kn",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("531CDC10-4010-42F6-AB73-3D214DBD71F8"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Schenker",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    },
-	                    new Team()
-	                    {
-		                    Id = new Guid("7EB32CEE-3C22-4558-B961-861C1C140C5E"),
-		                    CreatedOn = DateTime.Now,
-		                    Name = "Autopia",
-		                    Status = EntityStatus.Active,
-		                    Players = Players.Skip(2).Take(2).ToList()
-	                    }
-					};
+                        new Team()
+                        {
+                            Id = new Guid("065CBE10-67EF-4FFA-9B4F-42F3A03CB7AD"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Team Tam",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("5CF4812D-322E-4D09-900D-07DFBA1F5EF6"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Tricky Dicky's Big Suite",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("366CBD25-428D-4F88-B04C-976667C2E0C6"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Schenker Utd",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("445BDE94-AD73-4296-A0CE-09D6CDAB448F"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Qantas",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("90DDACF2-2BBD-4060-9459-4F918922F2E3"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Ivory Toast",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("6587CD7F-BBBF-436C-8A9E-7BB4C516235B"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Anchors",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("3D5F88B8-0FED-40AB-AD67-CA6BE154CC6A"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Commander Centre",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("4ED6DEA2-5DA3-4A9D-AA16-62E35225EB1E"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Kn",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("531CDC10-4010-42F6-AB73-3D214DBD71F8"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Schenker",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        },
+                        new Team()
+                        {
+                            Id = new Guid("7EB32CEE-3C22-4558-B961-861C1C140C5E"),
+                            CreatedOn = DateTime.Now,
+                            Name = "Autopia",
+                            Status = EntityStatus.Active,
+                            Players = Players.Skip(2).Take(2).ToList()
+                        }
+                    };
             }
             return teams;
         }
@@ -220,59 +220,59 @@ namespace Soccernation
                             TeamHome = Teams[2],
                             TeamVisitor = Teams[3]
                         },
-	                    new Fixture()
-	                    {
-		                    Id = new Guid("A278FCE1-EC0C-4682-9CF0-8FC82D8637B6"),
-		                    CreatedOn = DateTime.Now,
-		                    Date = DateTime.Today.AddDays(7),
-		                    Status = FixtureStatus.Pending,
-		                    Round = 1,
-		                    TeamHome = Teams[4],
-		                    TeamVisitor = Teams[5]
-	                    },
-	                    new Fixture()
-	                    {
-		                    Id = new Guid("08F06CD6-108C-47E6-AEC3-0B25A2ABFE33"),
-		                    CreatedOn = DateTime.Now,
-		                    Date = DateTime.Today.AddDays(7),
-		                    Status = FixtureStatus.Pending,
-		                    Round = 1,
-		                    TeamHome = Teams[6],
-		                    TeamVisitor = Teams[7]
-	                    },
-	                    new Fixture()
-	                    {
-		                    Id = new Guid("531E6399-2938-4F95-A54F-EE2BB6D4140F"),
-		                    CreatedOn = DateTime.Now,
-		                    Date = DateTime.Today.AddDays(7),
-		                    Status = FixtureStatus.Pending,
-		                    Round = 1,
-		                    TeamHome = Teams[8],
-		                    TeamVisitor = Teams[9]
-	                    },
-	                    new Fixture()
-	                    {
-		                    Id = new Guid("13B69E9C-C503-421F-98F4-00335AF24AB4"),
-		                    CreatedOn = DateTime.Now,
-		                    Date = DateTime.Today.AddDays(7),
-		                    Status = FixtureStatus.Pending,
-		                    Round = 1,
-		                    TeamHome = Teams[10],
-		                    TeamVisitor = Teams[11]
-	                    },
-	                    new Fixture()
-	                    {
-		                    Id = new Guid("33049F8F-EC43-47E0-803F-56391C67F1FE"),
-		                    CreatedOn = DateTime.Now,
-		                    Date = DateTime.Today.AddDays(-1),
-		                    Status = FixtureStatus.Finished,
-		                    Round = 1,
-		                    TeamHome = Teams[0],
-		                    TeamVisitor = Teams[1],
-							TeamHomeScore = 6,
-							TeamVisitorScore = 2
-	                    }
-					};
+                        new Fixture()
+                        {
+                            Id = new Guid("A278FCE1-EC0C-4682-9CF0-8FC82D8637B6"),
+                            CreatedOn = DateTime.Now,
+                            Date = DateTime.Today.AddDays(7),
+                            Status = FixtureStatus.Pending,
+                            Round = 1,
+                            TeamHome = Teams[4],
+                            TeamVisitor = Teams[5]
+                        },
+                        new Fixture()
+                        {
+                            Id = new Guid("08F06CD6-108C-47E6-AEC3-0B25A2ABFE33"),
+                            CreatedOn = DateTime.Now,
+                            Date = DateTime.Today.AddDays(7),
+                            Status = FixtureStatus.Pending,
+                            Round = 1,
+                            TeamHome = Teams[6],
+                            TeamVisitor = Teams[7]
+                        },
+                        new Fixture()
+                        {
+                            Id = new Guid("531E6399-2938-4F95-A54F-EE2BB6D4140F"),
+                            CreatedOn = DateTime.Now,
+                            Date = DateTime.Today.AddDays(7),
+                            Status = FixtureStatus.Pending,
+                            Round = 1,
+                            TeamHome = Teams[8],
+                            TeamVisitor = Teams[9]
+                        },
+                        new Fixture()
+                        {
+                            Id = new Guid("13B69E9C-C503-421F-98F4-00335AF24AB4"),
+                            CreatedOn = DateTime.Now,
+                            Date = DateTime.Today.AddDays(7),
+                            Status = FixtureStatus.Pending,
+                            Round = 1,
+                            TeamHome = Teams[10],
+                            TeamVisitor = Teams[11]
+                        },
+                        new Fixture()
+                        {
+                            Id = new Guid("33049F8F-EC43-47E0-803F-56391C67F1FE"),
+                            CreatedOn = DateTime.Now,
+                            Date = DateTime.Today.AddDays(-1),
+                            Status = FixtureStatus.Finished,
+                            Round = 1,
+                            TeamHome = Teams[0],
+                            TeamVisitor = Teams[1],
+                            TeamHomeScore = 6,
+                            TeamVisitorScore = 2
+                        }
+                    };
             }
             return fixtures;
         }
@@ -291,20 +291,19 @@ namespace Soccernation
                             StartDate = DateTime.Today,
                             Status = EntityStatus.Active,
                             Fixtures = Fixtures,
-                            Name = "Futsal, Men's Thursday Lunchtime 2",
-                            Teams = Teams
+                            Name = "Futsal, Men's Thursday Lunchtime 2"
                         },
-	                    new Competition()
-	                    {
-		                    Id = new Guid("8CE1B530-3EFA-4907-B522-1D1ADB4D7CA4"),
-		                    CreatedOn = DateTime.Now,
-		                    StartDate = DateTime.Today,
-		                    Status = EntityStatus.Active,
+                        new Competition()
+                        {
+                            Id = new Guid("8CE1B530-3EFA-4907-B522-1D1ADB4D7CA4"),
+                            CreatedOn = DateTime.Now,
+                            StartDate = DateTime.Today,
+                            Status = EntityStatus.Active,
 		                    //Fixtures = Fixtures,
 		                    Name = "Men's Monday DIV1",
 		                    //Teams = Teams
 	                    }
-					};
+                    };
             }
             return competitions;
         }

@@ -29,5 +29,24 @@ namespace Soccernation.Controllers
 
             return NoContent();
         }
+
+        [HttpGet]
+        [Route("{teamId}/competitions")]
+        public IActionResult GetCompetitions(Guid teamId)
+        {
+            var competitions = Context.CompetitionsTeams.Where(o => o.Team.Id == teamId).Select(t => t.Competition);
+
+            if (competitions == null)
+                return BadRequest();
+
+            return Ok(competitions);
+        }
+
+        [HttpGet]
+        [Route("{teamId}/players")]
+        public IActionResult GetPlayers(Guid teamId)
+        {
+            return Ok(_repo.Get(teamId).Players); //TODO: test if it works
+        }
     }
 }

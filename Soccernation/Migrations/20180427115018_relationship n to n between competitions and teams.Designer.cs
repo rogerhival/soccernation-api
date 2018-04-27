@@ -11,9 +11,10 @@ using System;
 namespace Soccernation.Migrations
 {
     [DbContext(typeof(SoccernationContext))]
-    partial class SoccernationContextModelSnapshot : ModelSnapshot
+    [Migration("20180427115018_relationship n to n between competitions and teams")]
+    partial class relationshipntonbetweencompetitionsandteams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

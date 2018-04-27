@@ -11,7 +11,7 @@ namespace Soccernation.Models
     {
         public EntityAbstract()
         {
-            CreatedOn = DateTime.Now;
+            CreatedOn = DateTime.UtcNow;
             Id = Guid.NewGuid();
         }
 

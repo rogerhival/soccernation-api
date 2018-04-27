@@ -30,7 +30,7 @@ namespace Soccernation.Controllers
         public void Create(T record)
         {
             record.Id = Guid.NewGuid();
-            record.CreatedOn = DateTime.Now;
+            record.CreatedOn = DateTime.UtcNow;
             record.ModifiedOn = record.CreatedOn;
             record.Status = EntityStatus.Active;
             _context.Add(record);
@@ -38,7 +38,7 @@ namespace Soccernation.Controllers
 
         public void Update(T record)
         {
-            record.ModifiedOn = DateTime.Now;
+            record.ModifiedOn = DateTime.UtcNow;
             _context.Set<T>().Attach(record);
             _context.Entry(record).State = EntityState.Modified;
         }
@@ -49,7 +49,7 @@ namespace Soccernation.Controllers
 
             if (record != null)
             {
-                record.ModifiedOn = DateTime.Now;
+                record.ModifiedOn = DateTime.UtcNow;
                 record.Status = EntityStatus.Deleted;
             }
         }

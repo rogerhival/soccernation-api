@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class ResultRow : EntityAbstract
+    public class ResultRow : BaseEntity
     {
         public short Position { get; set; }
         public Team Team { get; set; }

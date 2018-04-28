@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class Team : EntityAbstract
+    public class Team : BaseEntity
     {
         [Required]
         public string Name { get; set; }

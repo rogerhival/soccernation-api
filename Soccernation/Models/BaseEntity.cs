@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public abstract class EntityAbstract : IEntity
+    public abstract class BaseEntity : IEntity
     {
-        public EntityAbstract()
+        public BaseEntity()
         {
             CreatedOnUtc = DateTime.UtcNow;
             Id = Guid.NewGuid();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soccernation.Models
 {
-    public class Fixture : EntityAbstract
+    public class Fixture : BaseEntity
     {
 
         [Required]

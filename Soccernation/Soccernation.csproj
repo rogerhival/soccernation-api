@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180428031328_globe changes, adding manager, referee and company models.cs" />
+    <Compile Remove="Migrations\20180428031328_globe changes, adding manager, referee and company models.Designer.cs" />
+    <Compile Remove="Migrations\20180428031834_globe changes-adding manager-referee and company models.cs" />
+    <Compile Remove="Migrations\20180428031834_globe changes-adding manager-referee and company models.Designer.cs" />
+    <Compile Remove="Migrations\20180428032315_globechanges_company_referee.cs" />
+    <Compile Remove="Migrations\20180428032315_globechanges_company_referee.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />

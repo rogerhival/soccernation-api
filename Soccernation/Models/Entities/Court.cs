@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Soccernation.Models
 {
-    public class Court : EntityAbstract
+    public class Court : BaseEntity
     {
         [NotMapped]
         public TimeSpan StartTime { get; set; }

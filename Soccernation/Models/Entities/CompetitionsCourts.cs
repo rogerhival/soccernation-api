@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Soccernation.Models
 {
-    public class CompetitionsCourts : EntityAbstract
+    public class CompetitionsCourts : BaseEntity
     {
         [Required]
         public Competition Competition { get; set; }

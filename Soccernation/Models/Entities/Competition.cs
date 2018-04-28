@@ -7,7 +7,7 @@ using Soccernation.Models.Enums;
 
 namespace Soccernation.Models
 {
-    public class Competition : EntityAbstract
+    public class Competition : BaseEntity
     {
         [Required]
         public string Name { get; set; }

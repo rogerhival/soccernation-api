@@ -1,0 +1,163 @@
+﻿<!--
+How to use this test file:
+    - Change the URL localhost port to your local one
+    - if you can't access the URL, you probably missing "app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());" on Startup.cs
+
+Reference
+    Make index.html as startup file in ASP.NET Core: http://www.talkingdotnet.com/make-index-html-startup-file-in-aspnet-core/
+-->
+
+<html>
+<head>
+    <title>Add competition</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+            table tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script>
+        var mainApp = angular.module("mainApp", []);
+
+        mainApp.controller("addCompetitionController", function ($scope, $http) {
+            $scope.submit = function () {
+                var urlAddCompetition = "http://localhost:65075/api/competitions";
+
+                var data = {
+                    name: $scope.competitionName,
+                    startDateUtc: $scope.competitionStartDateUtc,
+                    endDateUtc: $scope.competitionEndDateUtc,
+                    startTime: $scope.competitionStartTime,
+                    endTime: $scope.competitionEndTime,
+                    subscriptionPrice: $scope.competitionSubscriptionPrice,
+                    typeOfCompetition: $scope.competitionTypeOfCompetition,
+                    status: $scope.competitionStatus
+                };
+
+                $http.post(urlAddCompetition, data).
+                    success(function (data, status, headers, config) {
+                        alert('done');
+                        $scope.competitionName = '';
+                    }).
+                    error(function (data, status, headers, config) {
+                        alert('erro: ' + data);
+                    });
+            };
+        });
+    </script>
+</head>
+<body>
+    <h2>Add competition</h2>
+
+    <div ng-app="mainApp" ng-controller="addCompetitionController">
+        <form ng-submit="submit()" name="soccerForm" novalidate>
+            <table border="0">
+                <tr>
+                    <td>Name:</td>
+                    <td>
+                        <input name="competitionName" type="text" ng-model="competitionName" required>
+                        <span style="color:red" ng-show="soccerForm.competitionName.$dirty && soccerForm.competitionName.$invalid">
+                            <span ng-show="soccerForm.competitionName.$error.required">Name is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>StartDateUtc:</td>
+                    <td>
+                        <input type="date" id="competitionStartDateUtc" name="competitionStartDateUtc" ng-model="competitionStartDateUtc" placeholder="yyyy-MM-dd" min="2018-01-01" max="2100-12-31" required />
+                        <span style="color:red" ng-show="soccerForm.competitionStartDateUtc.$dirty && soccerForm.competitionStartDateUtc.$invalid">
+                            <span ng-show="soccerForm.competitionStartDateUtc.$error.required">StartDateUtc is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>EndDateUtc:</td>
+                    <td>
+                        <input type="date" id="competitionEndDateUtc" name="competitionEndDateUtc" ng-model="competitionEndDateUtc" placeholder="yyyy-MM-dd" min="2018-01-01" max="2100-12-31" required />
+                        <span style="color:red" ng-show="soccerForm.competitionEndDateUtc.$dirty && soccerForm.competitionEndDateUtc.$invalid">
+                            <span ng-show="soccerForm.competitionEndDateUtc.$error.required">EndDateUtc is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>StartTime:</td>
+                    <td>
+                        <input type="text" id="competitionStartTime" name="competitionStartTime" ng-model="competitionStartTime" required />
+                        <span style="color:red" ng-show="soccerForm.competitionStartTime.$dirty && soccerForm.competitionStartTime.$invalid">
+                            <span ng-show="soccerForm.competitionStartTime.$error.required">StartTime is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>EndTime:</td>
+                    <td>
+                        <input type="text" id="competitionEndTime" name="competitionEndTime" ng-model="competitionEndTime" required />
+                        <span style="color:red" ng-show="soccerForm.competitionEndTime.$dirty && soccerForm.competitionEndTime.$invalid">
+                            <span ng-show="soccerForm.competitionEndTime.$error.required">EndTime is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>SubscriptionPrice:</td>
+                    <td>
+                        <input name="competitionSubscriptionPrice" type="text" ng-model="competitionSubscriptionPrice" onkeypress='validate(event)' required>
+                        <span style="color:red" ng-show="soccerForm.competitionSubscriptionPrice.$dirty && soccerForm.competitionSubscriptionPrice.$invalid">
+                            <span ng-show="soccerForm.competitionSubscriptionPrice.$error.required">SubscriptionPrice is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>TypeOfCompetition:</td>
+                    <td>
+                        <input name="competitionTypeOfCompetition" type="text" ng-model="competitionTypeOfCompetition" required>
+                        <span style="color:red" ng-show="soccerForm.competitionTypeOfCompetition.$dirty && soccerForm.competitionTypeOfCompetition.$invalid">
+                            <span ng-show="soccerForm.competitionTypeOfCompetition.$error.required">TypeOfCompetition is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Status:</td>
+                    <td>
+                        <select name="competitionStatus" id="competitionStatus" ng-model="competitionStatus">
+                            <option value="Active" selected>Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Blocked">Blocked</option>
+                        </select>
+                        <span style="color:red" ng-show="soccerForm.competitionStatus.$dirty && soccerForm.competitionStatus.$invalid">
+                            <span ng-show="soccerForm.competitionStatus.$error.required">Status is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" id="submit" value="Submit" />
+                        <input type="button" class="button_active" onclick="location.href='/index.html';" value="Back" />
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</body>
+</html>

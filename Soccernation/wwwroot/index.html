@@ -73,7 +73,13 @@ Reference
 </head>
 <body>
     <h2>SoccerNation</h2>
-    
+
+    <input type="button" class="button_active" onclick="location.href='/addCompetition.html';" value="Add Competition" />
+    <input type="button" class="button_active" onclick="location.href='/addTeam.html';" value="Add Team" />
+    <input type="button" class="button_active" onclick="location.href='/generateFixtures.html';" value="Generate Fixtures" />
+    <br />
+    <br />
+
     <div ng-app="mainApp">
         <div ng-controller="competitionsController">
             Select competition: <select ng-model="selectedCompetition" ng-options="x.name for x in competitions" ng-change="fix(selectedCompetition.id)"></select>

@@ -62,14 +62,14 @@ Reference
     <h2>Add team to a competition</h2>
 
     <div ng-app="mainApp" ng-controller="addTeamController">
-        <form ng-submit="submit()" name="studentForm" novalidate>
+        <form ng-submit="submit()" name="soccerForm" novalidate>
             <table border="0">
                 <tr>
                     <td>Competition: </td>
                     <td>
                         <select name="teamCompetition" ng-model="teamCompetition" ng-options="x.name for x in competitions"></select>
-                        <span style="color:red" ng-show="studentForm.teamCompetition.$dirty && studentForm.teamCompetition.$invalid">
-                            <span ng-show="studentForm.teamCompetition.$error.required">Last Name is required.</span>
+                        <span style="color:red" ng-show="soccerForm.teamCompetition.$dirty && soccerForm.teamCompetition.$invalid">
+                            <span ng-show="soccerForm.teamCompetition.$error.required">Last Name is required.</span>
                         </span>
                     </td>
                 </tr>
@@ -78,8 +78,8 @@ Reference
                     <td>Team name:</td>
                     <td>
                         <input name="teamName" type="text" ng-model="teamName" required>
-                        <span style="color:red" ng-show="studentForm.teamName.$dirty && studentForm.teamName.$invalid">
-                            <span ng-show="studentForm.teamName.$error.required">Name is required.</span>
+                        <span style="color:red" ng-show="soccerForm.teamName.$dirty && soccerForm.teamName.$invalid">
+                            <span ng-show="soccerForm.teamName.$error.required">Name is required.</span>
                         </span>
                     </td>
                 </tr>
@@ -92,8 +92,8 @@ Reference
                             <option value="Inactive">Inactive</option>
                             <option value="Blocked">Blocked</option>
                         </select>
-                        <span style="color:red" ng-show="studentForm.teamStatus.$dirty && studentForm.teamStatus.$invalid">
-                            <span ng-show="studentForm.teamStatus.$error.required">Status is required.</span>
+                        <span style="color:red" ng-show="soccerForm.teamStatus.$dirty && soccerForm.teamStatus.$invalid">
+                            <span ng-show="soccerForm.teamStatus.$error.required">Status is required.</span>
                         </span>
                     </td>
                 </tr>
@@ -102,6 +102,7 @@ Reference
                     <td></td>
                     <td>
                         <input type="submit" id="submit" value="Submit" />
+                        <input type="button" class="button_active" onclick="location.href='/index.html';" value="Back" />
                     </td>
                 </tr>
 

@@ -13,7 +13,7 @@ namespace Soccernation.Migrations
                 table: "Users");
 
             migrationBuilder.RenameColumn(
-                name: "ExpireDateUtc",
+                name: "ExpireDateUTC",
                 table: "Users",
                 newName: "ExpireDateUtc");
 

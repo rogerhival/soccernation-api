@@ -39,7 +39,7 @@ namespace Soccernation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] T record)
+        public virtual async Task<IActionResult> Create([FromBody] T record)
         {
             _repository.Create(record);
             if (await _repository.SaveAsync() == 0)

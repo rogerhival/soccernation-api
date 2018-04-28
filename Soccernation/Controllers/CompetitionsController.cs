@@ -46,8 +46,8 @@ namespace Soccernation.Controllers
         }
 
         [HttpPost]
-        [Route("{competitionId}/teams?hasPaid={hasPaid}")]
-        public IActionResult AddTeam([FromBody] List<Team> teams, Guid competitionId, [FromQuery] byte hasPaid = 0)
+        [Route("{competitionId}/teams")]
+        public IActionResult AddTeam([FromBody] List<Team> teams, Guid competitionId)
         {
             if (teams == null)
                 return BadRequest();
@@ -57,7 +57,7 @@ namespace Soccernation.Controllers
             if (competition == null)
                 return BadRequest();
 
-            teams.ForEach((team) => { Context.CompetitionsTeams.Add(new CompetitionsTeams { Team = team, Competition = competition, HasPaid = (hasPaid == 1)}); });
+            teams.ForEach((team) => { Context.CompetitionsTeams.Add(new CompetitionsTeams { Team = team, Competition = competition, HasPaid = team.HasPaid }); });
             Context.SaveChanges();
 
             return Ok(competition);

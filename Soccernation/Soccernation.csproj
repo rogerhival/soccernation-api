@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20180428031834_globe changes-adding manager-referee and company models.Designer.cs" />
     <Compile Remove="Migrations\20180428032315_globechanges_company_referee.cs" />
     <Compile Remove="Migrations\20180428032315_globechanges_company_referee.Designer.cs" />
+    <Compile Remove="Migrations\20180428062312_2.cs" />
+    <Compile Remove="Migrations\20180428062312_2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

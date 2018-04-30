@@ -3,6 +3,7 @@ using Soccernation.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Soccernation.Helpers
@@ -90,11 +91,12 @@ namespace Soccernation.Helpers
             // Round: problema com impar
             // *************************************************
             var fixtures = new List<Fixture>();
+            var rounds = new RoundGenerator(teams);
 
             if (teams != null && teams.Count > 1)
             {
                 Shuffle(teams);
-                
+
                 for (var i = 0; i < teams.Count; i++)
                 {
                     var home = true;
@@ -115,29 +117,17 @@ namespace Soccernation.Helpers
                             fixture.TeamVisitor = team1;
                         }
                         fixture.Status = FixtureStatus.Pending;
-                        
+                        fixture.Round = rounds.GetRoundByTeam(team1, team2);
                         //fixture.Date
+                        //fixture.Court
 
                         fixtures.Add(fixture);
                         home = !home;
                     }
                 }
-
-                //var round = 1;
-                //for (var i = 0; i < teams.Count; i++)
-                //{
-                //    for (var j = i+1; j < teams.Count; j++)
-                //    {
-                //        var fixture = fixtures.First(f => f.TeamHome == teams[i] && f.TeamVisitor == teams[j]);
-                //        fixture.Round = round;
-
-                //    }
-                //    round++;
-                //}
-
             }
-
-            return fixtures.OrderByDescending(f => f.Round).ToList();
+            
+            return fixtures.OrderBy(f => f.Round).ToList();
         }
 
         static void Shuffle<T>(IList<T> list)
@@ -151,6 +141,110 @@ namespace Soccernation.Helpers
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
+            }
+        }
+
+        class RoundGenerator
+        {
+            List<string> teamList;
+            List<string> teamListInverted;
+            int RoundCounter = 1;
+            List<RoundStruct> roundsByTeam;
+            public bool DummyTeam = false; // ODD number of teams -> one team will no be able to play.
+            public bool NextRoundExists => (RoundCounter < teamListInverted.Count);
+
+            public RoundGenerator(List<Team> teams)
+            {
+                teamList = teams.Select(t => t.Name).ToList();
+
+                // ODD number of teams
+                if (teamList.Count % 2 != 0)
+                {
+                    teamList.Add("MISSING TEAM");
+                    DummyTeam = true;
+                }
+
+                teamListInverted = new List<string>();
+                for (var i = teamList.Count - 1; i >= 0; i--)
+                {
+                    teamListInverted.Add(teamList[i]);
+                }
+
+                PopulateRounds();
+            }
+
+            void PopulateRounds()
+            {
+                roundsByTeam = new List<RoundStruct>();
+                while (NextRoundExists)
+                {
+                    for (int x = 0; x < teamListInverted.Count / 2; x++)
+                    {
+                        roundsByTeam.Add(new RoundStruct() { Round = RoundCounter, Team1 = teamList[x], Team2 = teamListInverted[x] });
+                    }
+
+                    NextRound();
+                }
+            }
+
+            void RotateTeamList(int atPos)
+            {
+                if (atPos == 1)
+                {
+                    var iO = teamList[teamList.Count - 1];
+                    RotateTeamList(atPos + 1);
+                    teamList[1] = iO;
+                }
+                else
+                {
+                    if (atPos < teamList.Count - 1)
+                    {
+                        RotateTeamList(atPos + 1);
+                    }
+                    teamList[atPos] = teamList[atPos - 1];
+                }
+            }
+
+            void RotateTeamListInverted()
+            {
+                int i;
+                for (i = 0; i < teamListInverted.Count / 2; i++)
+                {
+                    teamListInverted[i] = teamListInverted[i + 1];
+                }
+                for (i = teamListInverted.Count / 2; i < teamListInverted.Count; i++)
+                {
+                    teamListInverted[i] = teamList[teamListInverted.Count / 2 - (i - teamListInverted.Count / 2 + 1)];
+                }
+            }
+
+            bool NextRound()
+            {
+                if (NextRoundExists)
+                {
+                    RoundCounter++; // Next round
+                    RotateTeamList(1); // A side rotation
+                    RotateTeamListInverted(); // B side rotation
+                    return true;
+                }
+
+                return false;
+            }
+
+            public int GetRoundByTeam(Team team1, Team team2)
+            {
+                var round = roundsByTeam.FirstOrDefault(r => (r.Team1 == team1.Name && r.Team2 == team2.Name) || (r.Team1 == team2.Name && r.Team2 == team1.Name));
+                if (round != null)
+                    return round.Round;
+
+                return 0;
+            }
+
+            class RoundStruct
+            {
+                public string Team1 { get; set; }
+                public string Team2 { get; set; }
+                public int Round { get; set; }
             }
         }
 

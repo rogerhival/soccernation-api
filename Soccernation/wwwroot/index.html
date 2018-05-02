@@ -109,7 +109,7 @@ Reference
                     <td>{{ row.loses }}</td>
                     <td>{{ row.goalsFor }}</td>
                     <td>{{ row.goalsAgainst }}</td>
-                    <td>{{ row.bonus }}</td> <!--???-->
+                    <td>{{ row.goalDifference }}</td> <!--???-->
                     <td>{{ row.points }}</td>
                 </tr>
             </table>
@@ -123,12 +123,14 @@ Reference
                     <th>round</th>
                     <th>home</th>
                     <th>visitor</th>
+                    <th>leg</th>
                 </tr>
                 <tr ng-repeat="fixture in fixtures">
                     <td>{{ fixture.status }}</td>
                     <td>{{ fixture.round }}</td>
                     <td>{{ fixture.teamHome.name }}</td>
                     <td>{{ fixture.teamVisitor.name }}</td>
+                    <td>{{ fixture.leg }}</td>
                 </tr>
             </table>
             <br />

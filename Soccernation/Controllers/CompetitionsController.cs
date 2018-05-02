@@ -158,7 +158,7 @@ namespace Soccernation.Controllers
                 return BadRequest();
 
             var teams = Context.CompetitionsTeams.Where(o => o.Competition == competition).Select(c => c.Team).ToList();
-            var fixtures = FixtureHelper.CreateRandomFixtures(teams);
+            var fixtures = FixtureHelper.CreateRandomFixtures(teams, competition.IsTwoLeggedTie);
 
             return Ok(fixtures);
         }

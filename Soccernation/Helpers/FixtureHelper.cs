@@ -1,10 +1,9 @@
-﻿using Soccernation.Models;
-using Soccernation.Models.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
+using Soccernation.Models;
+using Soccernation.Models.Enums;
 
 namespace Soccernation.Helpers
 {
@@ -20,14 +19,14 @@ namespace Soccernation.Helpers
             {
                 var resultRow = new ResultRow();
                 resultRow.Team = item;
-                FixtureCalculator(competition, item, resultRow);
+                LadderCalculator(competition, item, resultRow);
                 resultRows.Add(resultRow);
             }
 
-            return resultRows.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ThenByDescending(o => o.Draws).ThenByDescending(o => o.Loses).ThenBy(o => o.Team.Name).ToList();
+            return resultRows.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ThenByDescending(o => o.Draws).ThenByDescending(o => o.GoalDifference).ThenByDescending(o => o.GoalsAgainst).ThenBy(o => o.Team.Name).ToList();
         }
 
-        static void FixtureCalculator(Competition competition, Team team, ResultRow resultRow)
+        static void LadderCalculator(Competition competition, Team team, ResultRow resultRow)
         {
             var fixtures = competition.Fixtures.Where(f => f.Status == FixtureStatus.Finished && (f.TeamHome == team || f.TeamVisitor == team)).ToList();
             var totalGoalsFor = 0;
@@ -82,9 +81,9 @@ namespace Soccernation.Helpers
 
         #endregion Ladder
 
-        #region Ladder
+        #region Create Fixtures
 
-        public static List<Fixture> CreateRandomFixtures(List<Team> teams)
+        public static List<Fixture> CreateRandomFixtures(List<Team> teams, bool isTwoLeggedTie)
         {
             // *************************************************
             // TODO: Create it for DATES, COURT
@@ -118,6 +117,7 @@ namespace Soccernation.Helpers
                         }
                         fixture.Status = FixtureStatus.Pending;
                         fixture.Round = rounds.GetRoundByTeam(team1, team2);
+                        fixture.Leg = 1;
                         //fixture.Date
                         //fixture.Court
 
@@ -125,10 +125,46 @@ namespace Soccernation.Helpers
                         home = !home;
                     }
                 }
+
+                if (isTwoLeggedTie)
+                {
+                    var fixtureCount = fixtures.Count;
+                    for (int i = 0; i < fixtureCount; i++)
+                    {
+                        var newFixture = CloneObject(fixtures[i]);
+                        newFixture.Leg = 2;
+                        var teamHome = newFixture.TeamVisitor;
+                        var teamVisitor = newFixture.TeamHome;
+                        newFixture.TeamHome = teamHome;
+                        newFixture.TeamVisitor = teamVisitor;
+                        fixtures.Add(newFixture);
+                    }
+                }
             }
-            
-            return fixtures.OrderBy(f => f.Round).ToList();
+
+            return fixtures.GroupBy(g => g.Leg).OrderBy(g => g.Key).SelectMany(g => g.OrderBy(x => x.Round)).ToList();
         }
+
+        static Fixture CloneObject(Fixture fixture)
+        {
+            return AutoMapper.Map<Fixture, Fixture>(fixture);
+        }
+
+        static IMapper AutoMapper
+        {
+            get
+            {
+                //Install-Package AutoMapper
+                if (autoMapper == null)
+                {
+                    var config = new MapperConfiguration(cfg => { cfg.CreateMap<Fixture, Fixture>(); });
+                    autoMapper = config.CreateMapper();
+                }
+
+                return autoMapper;
+            }
+        }
+        static IMapper autoMapper;
 
         static void Shuffle<T>(IList<T> list)
         {
@@ -248,6 +284,6 @@ namespace Soccernation.Helpers
             }
         }
 
-        #endregion Ladder
+        #endregion Create Fixtures
     }
 }

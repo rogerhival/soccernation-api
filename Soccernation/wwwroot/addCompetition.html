@@ -43,6 +43,7 @@ Reference
                     endTime: $scope.competitionEndTime,
                     subscriptionPrice: $scope.competitionSubscriptionPrice,
                     typeOfCompetition: $scope.competitionTypeOfCompetition,
+                    isTwoLeggedTie: $scope.competitionIsTwoLeggedTie,
                     status: $scope.competitionStatus
                 };
 
@@ -77,7 +78,7 @@ Reference
                 <tr>
                     <td>StartDateUtc:</td>
                     <td>
-                        <input type="date" id="competitionStartDateUtc" name="competitionStartDateUtc" ng-model="competitionStartDateUtc" placeholder="yyyy-MM-dd" min="2018-01-01" max="2100-12-31" required />
+                        <input type="date" id="competitionStartDateUtc" name="competitionStartDateUtc" ng-model="competitionStartDateUtc" placeholder="yyyy-MM-dd" min="2018-01-01" max="2100-12-31" />
                         <span style="color:red" ng-show="soccerForm.competitionStartDateUtc.$dirty && soccerForm.competitionStartDateUtc.$invalid">
                             <span ng-show="soccerForm.competitionStartDateUtc.$error.required">StartDateUtc is required.</span>
                         </span>
@@ -87,7 +88,7 @@ Reference
                 <tr>
                     <td>EndDateUtc:</td>
                     <td>
-                        <input type="date" id="competitionEndDateUtc" name="competitionEndDateUtc" ng-model="competitionEndDateUtc" placeholder="yyyy-MM-dd" min="2018-01-01" max="2100-12-31" required />
+                        <input type="date" id="competitionEndDateUtc" name="competitionEndDateUtc" ng-model="competitionEndDateUtc" placeholder="yyyy-MM-dd" min="2018-01-01" max="2100-12-31" />
                         <span style="color:red" ng-show="soccerForm.competitionEndDateUtc.$dirty && soccerForm.competitionEndDateUtc.$invalid">
                             <span ng-show="soccerForm.competitionEndDateUtc.$error.required">EndDateUtc is required.</span>
                         </span>
@@ -97,7 +98,7 @@ Reference
                 <tr>
                     <td>StartTime:</td>
                     <td>
-                        <input type="text" id="competitionStartTime" name="competitionStartTime" ng-model="competitionStartTime" required />
+                        <input type="text" id="competitionStartTime" name="competitionStartTime" ng-model="competitionStartTime" />
                         <span style="color:red" ng-show="soccerForm.competitionStartTime.$dirty && soccerForm.competitionStartTime.$invalid">
                             <span ng-show="soccerForm.competitionStartTime.$error.required">StartTime is required.</span>
                         </span>
@@ -107,7 +108,7 @@ Reference
                 <tr>
                     <td>EndTime:</td>
                     <td>
-                        <input type="text" id="competitionEndTime" name="competitionEndTime" ng-model="competitionEndTime" required />
+                        <input type="text" id="competitionEndTime" name="competitionEndTime" ng-model="competitionEndTime" />
                         <span style="color:red" ng-show="soccerForm.competitionEndTime.$dirty && soccerForm.competitionEndTime.$invalid">
                             <span ng-show="soccerForm.competitionEndTime.$error.required">EndTime is required.</span>
                         </span>
@@ -117,7 +118,7 @@ Reference
                 <tr>
                     <td>SubscriptionPrice:</td>
                     <td>
-                        <input name="competitionSubscriptionPrice" type="text" ng-model="competitionSubscriptionPrice" onkeypress='validate(event)' required>
+                        <input name="competitionSubscriptionPrice" type="text" ng-model="competitionSubscriptionPrice" onkeypress='validate(event)' />
                         <span style="color:red" ng-show="soccerForm.competitionSubscriptionPrice.$dirty && soccerForm.competitionSubscriptionPrice.$invalid">
                             <span ng-show="soccerForm.competitionSubscriptionPrice.$error.required">SubscriptionPrice is required.</span>
                         </span>
@@ -127,9 +128,19 @@ Reference
                 <tr>
                     <td>TypeOfCompetition:</td>
                     <td>
-                        <input name="competitionTypeOfCompetition" type="text" ng-model="competitionTypeOfCompetition" required>
+                        <input name="competitionTypeOfCompetition" type="text" ng-model="competitionTypeOfCompetition" required />
                         <span style="color:red" ng-show="soccerForm.competitionTypeOfCompetition.$dirty && soccerForm.competitionTypeOfCompetition.$invalid">
                             <span ng-show="soccerForm.competitionTypeOfCompetition.$error.required">TypeOfCompetition is required.</span>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Two-Legged Tie:</td>
+                    <td>
+                        <input name="competitionIsTwoLeggedTie" type="checkbox" ng-model="competitionIsTwoLeggedTie" />
+                        <span style="color:red" ng-show="soccerForm.competitionIsTwoLeggedTie.$dirty && soccerForm.competitionIsTwoLeggedTie.$invalid">
+                            <span ng-show="soccerForm.competitionIsTwoLeggedTie.$error.required">Two-Legged Tie is required.</span>
                         </span>
                     </td>
                 </tr>

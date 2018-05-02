@@ -22,6 +22,7 @@ namespace Soccernation.Models
 
         public decimal? SubscriptionPrice { get; set; }
         public string TypeOfCompetition { get; set; }
+        public bool IsTwoLeggedTie { get; set; }
         public List<ResultRow> Results { get; set; }
     }
 }

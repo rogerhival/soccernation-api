@@ -56,7 +56,7 @@ Reference
     </script>
 </head>
 <body>
-    <h2>Add team to a competition</h2>
+    <h2>Generate Competition</h2>
 
     <div ng-app="mainApp" ng-controller="addTeamController">
         <div>
@@ -73,7 +73,7 @@ Reference
         <br />
         <br />
         <div>
-            <form ng-submit="submit()" name="soccerForm" novalidate class="test">
+            <form ng-submit="submit()" name="soccerForm" novalidate>
                 <table border="0">
                     <tr>
                         <td>#</td>
@@ -81,6 +81,7 @@ Reference
                         <td>Home</td>
                         <td>Visitor</td>
                         <td>Status</td>
+                        <td>Leg</td>
                     </tr>
 
                     <tr ng-repeat="row in fixtures">
@@ -89,6 +90,7 @@ Reference
                         <td>{{ row.teamHome.name }}</td>
                         <td>{{ row.teamVisitor.name }}</td>
                         <td>{{ row.status }}</td>
+                        <td>{{ row.leg }}</td>
                     </tr>
                 </table>
             </form>

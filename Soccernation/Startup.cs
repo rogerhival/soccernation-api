@@ -26,7 +26,9 @@ namespace Soccernation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+                                                             .AllowAnyMethod()
+                                                              .AllowAnyHeader()));
 
             services.AddDbContext<SoccernationContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             
@@ -46,9 +48,10 @@ namespace Soccernation
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
+            app.UseCors("AllowAll");
 
             app.UseMvc();
         }
     }
 }
+

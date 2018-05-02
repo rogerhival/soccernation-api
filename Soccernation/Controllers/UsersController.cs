@@ -58,7 +58,7 @@ namespace Soccernation.Controllers
             if (await Context.SaveChangesAsync() == 0)
                 return BadRequest();
 
-            return Ok();
+            return new ObjectResult(user);
         }
     }
 }

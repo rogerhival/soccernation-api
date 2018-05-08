@@ -4,6 +4,7 @@ using Soccernation.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Soccernation.Controllers
@@ -17,12 +18,12 @@ namespace Soccernation.Controllers
             _context = context;
         }
 
-        public IQueryable<T> Get()
+        IQueryable<T> Get()
         {
             return _context.Set<T>().Where(e => e.Status != EntityStatus.Deleted);
         }
 
-        public T Get(Guid id)
+        T Get(Guid id)
         {
             return Get().SingleOrDefault(e => e.Id == id);
         }

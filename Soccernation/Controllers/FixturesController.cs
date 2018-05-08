@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,12 +7,17 @@ using Soccernation.Models;
 
 namespace Soccernation.Controllers
 {
-	[Produces("application/json")]
+    [Produces("application/json")]
     public class FixturesController : BaseController<Fixture>
     {
+        IApplicationRepository<Fixture> _repo;
+        SoccernationContext _context;
+
         public FixturesController(IApplicationRepository<Fixture> repository, SoccernationContext context) : base(repository, context)
         {
-		}
+            _repo = repository;
+            _context = context;
+        }
 
         [HttpGet]
         [Route("team/{teamId}/competition/{competitionId}")]
@@ -34,7 +40,7 @@ namespace Soccernation.Controllers
             return Ok(fixtures);
         }
 
-		[HttpGet]
+        [HttpGet]
         [Route("team/{teamId}")]
         public IActionResult GetByTeam(Guid teamId)
         {
@@ -66,6 +72,22 @@ namespace Soccernation.Controllers
                 return BadRequest();
 
             return Ok(fixtures);
+        }
+
+        public override IEnumerable<Fixture> Get()
+        {
+            return _context.Fixtures
+                 .Include(f => f.TeamHome)
+                 .Include(f => f.TeamVisitor)
+                 .ToList();
+        }
+
+        public override Fixture GetById(Guid id)
+        {
+            return _context.Fixtures
+                .Include(f => f.TeamHome)
+                .Include(f => f.TeamVisitor)
+                .FirstOrDefault(f => f.Id == id);
         }
     }
 }

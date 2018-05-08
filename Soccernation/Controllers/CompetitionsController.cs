@@ -21,17 +21,6 @@ namespace Soccernation.Controllers
             _repo = repository;
         }
 
-        #region Helpers
-
-        Competition GetById(Guid competitionId)
-        {
-            return Context.Competitions
-                .Include(c => c.Fixtures)
-                .FirstOrDefault(c => c.Id == competitionId);
-        }
-
-        #endregion Helpers
-
         [HttpGet]
         [Route("{competitionId}/teams")]
         public IActionResult GetTeams(Guid competitionId)
@@ -161,6 +150,22 @@ namespace Soccernation.Controllers
             var fixtures = FixtureHelper.CreateRandomFixtures(teams, competition.IsTwoLeggedTie);
 
             return Ok(fixtures);
+        }
+
+        public override IEnumerable<Competition> Get()
+        {
+            return Context.Competitions
+               .Include(c => c.Fixtures)
+               .Include(c => c.Results)
+               .ToList();
+        }
+
+        public override Competition GetById(Guid id)
+        {
+            return Context.Competitions
+                .Include(c => c.Fixtures)
+                .Include(c=>c.Results)
+                .FirstOrDefault(c => c.Id == id);
         }
     }
 }

@@ -12,8 +12,13 @@ namespace Soccernation.Controllers
     [Produces("application/json")]
     public class ResultRowsController : BaseController<ResultRow>
     {
+        IApplicationRepository<ResultRow> _repo;
+        SoccernationContext _context;
+
         public ResultRowsController(IApplicationRepository<ResultRow> repository, SoccernationContext context) : base(repository, context)
         {
+            _repo = repository;
+            _context = context;
         }
 
         [HttpGet]
@@ -42,5 +47,19 @@ namespace Soccernation.Controllers
             return NoContent();
         }
 
+        public override IEnumerable<ResultRow> Get()
+        {
+            return _context.ResultRows
+                .Include(rr => rr.Team)
+                .ToList();
+                
+        }
+
+        public override ResultRow GetById(Guid id)
+        {
+            return _context.ResultRows
+                .Include(rr => rr.Team)
+                .FirstOrDefault(rr => rr.Id == id);
+        }
     }
 }

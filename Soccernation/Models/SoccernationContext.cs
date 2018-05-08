@@ -20,6 +20,7 @@ namespace Soccernation.Models
         public DbSet<CompetitionsCourts> CompetitionsCourts { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Referee> Referees { get; set; }
+        public DbSet<Manager> Managers { get; set; }
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }

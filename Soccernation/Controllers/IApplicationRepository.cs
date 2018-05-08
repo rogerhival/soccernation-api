@@ -7,10 +7,6 @@ namespace Soccernation.Controllers
 {
     public interface IApplicationRepository<T> : IDisposable
     {
-        IQueryable<T> Get();
-
-        T Get(Guid id);
-
         void Create(T record);
 
         void Update(T record);

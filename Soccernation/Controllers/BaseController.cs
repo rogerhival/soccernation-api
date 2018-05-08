@@ -22,16 +22,20 @@ namespace Soccernation.Controllers
             Context.Database.EnsureCreated();
         }
 
+        public abstract IEnumerable<T> Get();
+
+        public abstract T GetById(Guid id);
+
         [HttpGet]
         public IActionResult Query()
         {
-            return Ok(_repository.Get());
+            return Ok(Get());
         }
 
         [HttpGet("{id}")]
         public IActionResult Find(Guid id)
         {
-            var record = _repository.Get(id);
+            var record = GetById(id);
             if (record == null)
                 return NotFound();
 

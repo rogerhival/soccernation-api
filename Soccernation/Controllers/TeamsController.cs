@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Soccernation.Models;
 
 namespace Soccernation.Controllers
@@ -12,22 +13,38 @@ namespace Soccernation.Controllers
     public class TeamsController : BaseController<Team>
     {
         IApplicationRepository<Team> _repo;
+        SoccernationContext _context;
 
         public TeamsController(IApplicationRepository<Team> repository, SoccernationContext context) : base(repository, context)
         {
             _repo = repository;
+            _context = context;
         }
 
         [HttpPost]
         [Route("{teamId}/player")]
         public async Task<IActionResult> AddPlayer([FromBody] Player player, Guid teamId)
         {
-            _repo.Get(teamId).Players.Add(player);
+            GetById(teamId).Players.Add(player);
 
             if (await _repo.SaveAsync() == 0)
                 return BadRequest();
 
             return NoContent();
+        }
+
+        public override IEnumerable<Team> Get()
+        {
+            return _context.Teams
+                .Include(t => t.Players)
+                .ToList();
+        }
+
+        public override Team GetById(Guid id)
+        {
+            return _context.Teams
+               .Include(t => t.Players)
+               .FirstOrDefault(t => t.Id == id);
         }
 
         [HttpGet]
@@ -46,7 +63,7 @@ namespace Soccernation.Controllers
         [Route("{teamId}/players")]
         public IActionResult GetPlayers(Guid teamId)
         {
-            return Ok(_repo.Get(teamId).Players); //TODO: test if it works
+            return Ok(GetById(teamId).Players);
         }
     }
 }

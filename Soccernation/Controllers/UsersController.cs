@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Soccernation.Models;
 
 namespace Soccernation.Controllers
@@ -12,8 +13,13 @@ namespace Soccernation.Controllers
     [Produces("application/json")]
     public class UsersController : BaseController<User>
     {
+        IApplicationRepository<User> _repo;
+        SoccernationContext _context;
+
         public UsersController(IApplicationRepository<User> repository, SoccernationContext context) : base(repository, context)
         {
+            _repo = repository;
+            _context = context;
         }
 
         [HttpPost]
@@ -59,6 +65,24 @@ namespace Soccernation.Controllers
                 return BadRequest();
 
             return new ObjectResult(user);
+        }
+
+        public override IEnumerable<User> Get()
+        {
+            return _context.Users
+                .Include(u => u.Company)
+                .Include(u => u.Manager)
+                .Include(u => u.Player)
+                .ToList();
+        }
+
+        public override User GetById(Guid id)
+        {
+            return _context.Users
+                .Include(u => u.Company)
+                .Include(u => u.Manager)
+                .Include(u => u.Player)
+                .FirstOrDefault(u=>u.Id == id);
         }
     }
 }

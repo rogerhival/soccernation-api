@@ -8,8 +8,9 @@ namespace Soccernation.Models
 {
     public class Player : BaseEntity
     {
-        [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public string Avatar { get; set; }
         public string AvatarThumb { get; set; }
         public string AvatarLarge { get; set; }

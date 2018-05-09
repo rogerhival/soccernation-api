@@ -13,6 +13,12 @@
     <Compile Remove="Migrations\20180428032315_globechanges_company_referee.Designer.cs" />
     <Compile Remove="Migrations\20180428062312_2.cs" />
     <Compile Remove="Migrations\20180428062312_2.Designer.cs" />
+    <Compile Remove="Migrations\20180509111007_6.cs" />
+    <Compile Remove="Migrations\20180509111007_6.Designer.cs" />
+    <Compile Remove="Migrations\20180509111143_6.cs" />
+    <Compile Remove="Migrations\20180509111143_6.Designer.cs" />
+    <Compile Remove="Migrations\20180509112337_6.cs" />
+    <Compile Remove="Migrations\20180509112337_6.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

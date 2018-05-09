@@ -19,8 +19,11 @@ namespace Soccernation.Models
         public byte[] Key { get; set; }
         [Required]
         public byte[] KeySalt { get; set; }
-        [Required]
-        public string Name { get; set; }
+
+        public string CustomizedUrl { get; set; }
+        public string FacebookToken { get; set; }
+        public string GoogleToken { get; set; }
+        public string TwitterToken { get; set; }
 
         public DateTime? LastTimeLoginUtc { get; set; }
         public DateTime? ExpireDateUtc { get; set; }

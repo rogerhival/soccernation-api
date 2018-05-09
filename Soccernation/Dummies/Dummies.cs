@@ -25,7 +25,6 @@ namespace Soccernation
                             Id = new Guid("D188A356-0B28-479C-BB95-3B98BC3A2491"),
                             CreatedOnUtc = DateTime.UtcNow,
                             Email = "test@test.com",
-                            Name = "User 1",
                             Status = EntityStatus.Active,
                             Password = "test",
                             Player = Players[0]
@@ -35,7 +34,6 @@ namespace Soccernation
                             Id = new Guid("1DB282E0-3F93-4A5E-9536-7B714E24DDCB"),
                             CreatedOnUtc = DateTime.UtcNow,
                             Email = "test2@test2.com",
-                            Name = "User 2",
                             Status = EntityStatus.Active,
                             Password = "test2",
                             Player = Players[1]
@@ -57,28 +55,32 @@ namespace Soccernation
                             Id = new Guid("535D2851-3C94-4891-935F-37EE7C4846FF"),
                             CreatedOnUtc = DateTime.UtcNow,
                             Status = EntityStatus.Active,
-                            Name = "Player 1"
+                            FirstName = "Player",
+                            LastName = "1"
                         },
                         new Player()
                         {
                             Id = new Guid("538DA346-70A3-4F6A-9D77-53CE04256A37"),
                             CreatedOnUtc = DateTime.UtcNow,
                             Status = EntityStatus.Active,
-                            Name = "Player 2"
+                            FirstName = "Player",
+                            LastName = "2"
                         },
                         new Player()
                         {
                             Id = new Guid("F30D3038-3128-4BBF-A7D0-1A41B4C76427"),
                             CreatedOnUtc = DateTime.UtcNow,
                             Status = EntityStatus.Active,
-                            Name = "Player 3"
+                            FirstName = "Player",
+                            LastName = "3"
                         },
                         new Player()
                         {
                             Id = new Guid("1A740AD9-20C8-4941-B50A-3345C552612D"),
                             CreatedOnUtc = DateTime.UtcNow,
                             Status = EntityStatus.Active,
-                            Name = "Player 4"
+                            FirstName = "Player",
+                            LastName = "4"
                         }
                     };
             }

@@ -24,5 +24,16 @@ namespace Soccernation.Models
         public string TypeOfCompetition { get; set; }
         public bool IsTwoLeggedTie { get; set; }
         public List<ResultRow> Results { get; set; }
+
+        [Required]
+        public int PointsWhenWin { get; set; }
+        [Required]
+        public int PointsWhenLoss { get; set; }
+        [Required]
+        public int PointsWhenDraw { get; set; }
+        [Required]
+        public int PointsWhenBye { get; set; }
+        [Required]
+        public int PointsWhenForfeit { get; set; }
     }
 }

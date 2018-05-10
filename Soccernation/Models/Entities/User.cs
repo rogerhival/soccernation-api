@@ -33,6 +33,15 @@ namespace Soccernation.Models
         public Player Player { get; set; }
         public Company Company { get; set; }
         public Manager Manager { get; set; }
+
+        [NotMapped]
+        public bool IsPlayer { get; set; }
+        [NotMapped]
+        public bool IsCompany { get; set; }
+        [NotMapped]
+        public bool IsManager { get; set; }
+        [NotMapped]
+        public string Name { get; set; }
     }
 
     public class LoginData

@@ -40,7 +40,19 @@ namespace Soccernation.Controllers
             record.LastTimeLoginUtc = DateTime.UtcNow;
             record.ExpireDateUtc = DateTime.UtcNow.AddYears(1);
 
+            if (record.IsCompany)
+            {
+                var company = new Company
+                {
+                    FantasyName = record.Name,
+                    Email = record.Email,
+                };
+                _context.Companies.Add(company);
+                record.Company = company;
+            }
+
             Context.Users.Add(record);
+
             if (await Context.SaveChangesAsync() == 0)
                 return BadRequest();
 

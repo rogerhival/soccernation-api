@@ -178,6 +178,9 @@ namespace Soccernation.Controllers
         {
             return Context.Competitions
                .Include(c => c.Fixtures)
+                    .ThenInclude(f => f.TeamHome)
+               .Include(c => c.Fixtures)
+                    .ThenInclude(f => f.TeamVisitor)
                .Include(c => c.Results)
                .ToList();
         }
@@ -186,7 +189,10 @@ namespace Soccernation.Controllers
         {
             return Context.Competitions
                 .Include(c => c.Fixtures)
-                .Include(c=>c.Results)
+                    .ThenInclude(f => f.TeamHome)
+                .Include(c => c.Fixtures)
+                    .ThenInclude(f => f.TeamVisitor)
+                .Include(c => c.Results)
                 .FirstOrDefault(c => c.Id == id);
         }
     }

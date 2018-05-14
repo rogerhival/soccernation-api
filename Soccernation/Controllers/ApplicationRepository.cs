@@ -40,7 +40,7 @@ namespace Soccernation.Controllers
         public void Update(T record)
         {
             record.ModifiedOnUtc = DateTime.UtcNow;
-            _context.Set<T>().Attach(record);
+            //_context.Set<T>().Attach(record);
             _context.Entry(record).State = EntityState.Modified;
         }
 

@@ -36,7 +36,7 @@ namespace Soccernation.Controllers
 
         [HttpPost]
         [Route("{competitionId}/teams")]
-        public IActionResult AddTeam([FromBody] List<Team> teams, Guid competitionId)
+        public IActionResult AddTeam(Guid competitionId, [FromBody] List<Team> teams)
         {
             if (teams == null)
                 return BadRequest();
@@ -47,6 +47,7 @@ namespace Soccernation.Controllers
                 return BadRequest();
 
             teams.ForEach((team) => { Context.CompetitionsTeams.Add(new CompetitionsTeams { Team = team, Competition = competition, HasPaid = team.HasPaid }); });
+
             Context.SaveChanges();
 
             return Ok(competition);
@@ -77,18 +78,39 @@ namespace Soccernation.Controllers
 
         [HttpPost]
         [Route("{competitionId}/fixtures")]
-        public async Task<IActionResult> AddFixture(Guid competitionId, [FromBody] Fixture fixture)
+        public async Task<IActionResult> AddFixture(Guid competitionId, [FromBody] List<Fixture> fixtures)
         {
-            var competition = GetById(competitionId);
+            try
+            {
+                if (fixtures == null)
+                    return BadRequest();
 
-            if (competition == null)
-                return BadRequest();
+                var competition = GetById(competitionId);
 
-            competition.Fixtures.Add(fixture);
-            if (await Context.SaveChangesAsync() == 0)
-                return BadRequest();
+                if (competition == null)
+                    return BadRequest();
 
-            return Ok(competition.Fixtures);
+                // TEMP
+                foreach (var item in fixtures)
+                {
+                    var idTeam1 = item.TeamHome.Id;
+                    var idTeam2 = item.TeamVisitor.Id;
+
+                    item.TeamHome = Context.Teams.Include(t => t.Players).FirstOrDefault(t => t.Id == idTeam1);
+                    item.TeamVisitor = Context.Teams.Include(t => t.Players).FirstOrDefault(t => t.Id == idTeam2);
+                }
+
+                fixtures.ForEach((fixture) => { competition.Fixtures.Add(fixture); });
+
+                if (await Context.SaveChangesAsync() == 0)
+                    return BadRequest();
+
+                return Ok(competition.Fixtures);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]

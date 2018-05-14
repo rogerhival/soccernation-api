@@ -132,6 +132,7 @@ namespace Soccernation.Helpers
                     for (int i = 0; i < fixtureCount; i++)
                     {
                         var newFixture = CloneObject(fixtures[i]);
+                        newFixture.Id = Guid.NewGuid();
                         newFixture.Leg = 2;
                         var teamHome = newFixture.TeamVisitor;
                         var teamVisitor = newFixture.TeamHome;
@@ -142,7 +143,34 @@ namespace Soccernation.Helpers
                 }
             }
 
+            GuaranteeUniqueId(fixtures);
             return fixtures.GroupBy(g => g.Leg).OrderBy(g => g.Key).SelectMany(g => g.OrderBy(x => x.Round)).ToList();
+        }
+
+        static void GuaranteeUniqueId(List<Fixture> fixtures)
+        {
+            var keys = new List<Guid>();
+            var done = true;
+            for (int i = 0; i < 100; i++)
+            {
+                done = true;
+                keys = new List<Guid>();
+                foreach (var item in fixtures)
+                {
+                    if (keys.Contains(item.Id))
+                    {
+                        item.Id = Guid.NewGuid();
+                        done = false;
+                    }
+                    else
+                    {
+                        keys.Add(item.Id);
+                    }
+                }
+
+                if (done)
+                    break;
+            }
         }
 
         static Fixture CloneObject(Fixture fixture)

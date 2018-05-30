@@ -28,5 +28,6 @@ namespace Soccernation.Models
         public string ExtraEmail { get; set; }
 
         public List<Competition> Competitions { get; set; }
+        public List<Court> Courts { get; set; }
     }
 }

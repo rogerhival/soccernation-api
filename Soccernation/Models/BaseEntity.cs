@@ -21,6 +21,5 @@ namespace Soccernation.Models
         public DateTime CreatedOnUtc { get; set; }
 
         public DateTime ModifiedOnUtc { get; set; }
-        public string Status { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Soccernation.Controllers
 
         IQueryable<T> Get()
         {
-            return _context.Set<T>().Where(e => e.Status != EntityStatus.Deleted);
+            return _context.Set<T>();
         }
 
         T Get(Guid id)
@@ -33,7 +33,6 @@ namespace Soccernation.Controllers
             record.Id = Guid.NewGuid();
             record.CreatedOnUtc = DateTime.UtcNow;
             record.ModifiedOnUtc = record.CreatedOnUtc;
-            record.Status = EntityStatus.Active;
             _context.Add(record);
         }
 
@@ -50,8 +49,7 @@ namespace Soccernation.Controllers
 
             if (record != null)
             {
-                record.ModifiedOnUtc = DateTime.UtcNow;
-                record.Status = EntityStatus.Deleted;
+                _context.Entry(record).State = EntityState.Deleted;
             }
         }
 

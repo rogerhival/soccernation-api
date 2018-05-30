@@ -25,5 +25,6 @@ namespace Soccernation.Models
         public int TeamHomeScore { get; set; }
         public int TeamVisitorScore { get; set; }
         public int Leg { get; set; }
+        public string Status { get; set; }
     }
 }

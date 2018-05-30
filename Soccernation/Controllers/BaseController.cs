@@ -55,14 +55,21 @@ namespace Soccernation.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] T record)
         {
-            if (id != record.Id)
-                return BadRequest();
+            try
+            {
+                if (id != record.Id)
+                    return BadRequest();
 
-            _repository.Update(record);
-            if (await _repository.SaveAsync() == 0)
-                return BadRequest();
+                _repository.Update(record);
+                if (await _repository.SaveAsync() == 0)
+                    return BadRequest();
 
-            return new ObjectResult(record);
+                return new ObjectResult(record);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
